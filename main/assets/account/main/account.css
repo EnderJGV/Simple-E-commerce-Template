@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Primary Colors */
+    --primary-white: #FFFFFF;
+    --primary-black: #363738;
+
+    /* Secondary Colors */
+    --secondary-1: #F5F5F5;
+    --secondary-2: #FEFAF1;
+    --secondary-3: #DB4444;
+
+    /* Text Colors */
+    --text-1: #FAFAFA;
+    --text-2: #7D8184;
+    --button-card: #000000;
+    --text-3: #000000;
+
+    /* Other Colors */
+    --button-1: #47AB48;
+    --button-2: #DB4444;
+    --hover-button-1: #E07575;
+    --hover-button-2: #A0BCE0;
+
+    /* Background Color */
+    --background: #FFFFFF;
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+
+header{
+    width: 100vw;
+    border-bottom: 1px solid #a3a3a34d;
+}
+
+.text_desconto{
+    background-color: #000000;
+    color: var(--primary-white);
+    text-align: center;
+    font-weight: 200;
+    font-size: .8rem;
+    padding: .5rem 0rem;
+}
+
+header .text_desconto p span{
+    font-weight: 400;
+}
+
+header .header_content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--background);
+    padding: 2rem;
+    height: 13vh;
+}
+
+header .header_content ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .header_content ul li{
+    list-style: none;
+    margin: 0rem 1rem;
+    font-weight: 300;
+    transition: 1s ease-in-out;
+}
+
+header .header_content ul li:hover{
+    position: relative;
+    border-bottom: 1px solid var(--primary-black);
+}
+
+/* Logo - Name*/
+header .header_content span{
+    font-weight: 600;
+}
+
+header .search{
+    width: 243px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .2rem;
+    border: .3rem;
+    background-color: var(--secondary-2);
+    box-shadow: 0px 0px 2px var(--primary-black);
+}
+
+header .search input {
+    background-color: transparent;
+    width: 70%;
+    padding: .5rem;
+    outline: none;
+}
+header .search input:placeholder-shown{
+    font-size: .6rem;
+}
+
+header .search:hover {
+    box-shadow: 0px 0px 2px var(--button-card);
+}
+
+header .search .fa-magnifying-glass{
+    color: var(--primary-black);
+    margin-left: 1rem;
+}
+
+
+header .search_store_itens{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .search_store_itens .search{
+    margin-right: 1rem;
+}
+
+header i{
+    transition: 30ms ease;
+}
+
+header i:hover{
+    color: var(--text-2);
+}
+header i:active{
+    color: var(--hover-button-1);
+    transition: 1ms ease;
+}
+
+.footer {
+    background-color: var(--button-card);
+    height: 440px;
+    width: 100vw;
+    position:fixed;
+    color: var(--text-1);
+    bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    .footer-content{
+        height: 50%;
+        width: 81.25%;
+        margin: 0 auto; 
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        column-gap: 80px;
+    }
+
+    .footer-content > div{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text-emphasis{
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .email-input{
+        border: 1px solid var(--primary-white);
+        padding: 12px;
+        display: flex;
+    }
+
+    .email-input i {
+        font-size: 24px;
+    }
+
+    .email-input input {
+        height: 24px;
+        width: 100%;
+        background-color: transparent;
+    }
+}
+
+.container {
+    display: flex; 
+    height: 100%;
+    width: 100%;
+}
+
+.errorMessageTitle {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.errorMessageText {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.errorMessageButton {
+    background-color: #DC3435 ;
+    color: var(--primary-white);
+    padding: 10px 20px;
+    border: none;
+}
+
+.containerMenu {
+    display: flex; 
+    height: 100%;
+    background-color: blue;
+}
+
+.textMenuTitle {
+    font-family: 'Poppins';
+}
+
+.containerForm {
+    height: 630px ;
+    width: 870px ;
+    box-shadow: 0px 0px 15px 1px #00000078;
+}
