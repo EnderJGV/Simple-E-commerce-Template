@@ -139,3 +139,50 @@ header i:active{
     color: var(--hover-button-1);
     transition: 1ms ease;
 }
+
+.footer {
+    background-color: var(--button-card);
+    height: 440px;
+    width: 100vw;
+    position:fixed;
+    color: var(--text-1);
+    bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    .footer-content{
+        height: 50%;
+        width: 81.25%;
+        margin: 0 auto; 
+        display: grid;
+        grid-template-columns: auto auto auto auto auto;
+        column-gap: 80px;
+    }
+
+    .footer-content > div{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .text-emphasis{
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .email-input{
+        border: 1px solid var(--primary-white);
+        padding: 12px;
+        display: flex;
+    }
+
+    .email-input i {
+        font-size: 24px;
+    }
+
+    .email-input input {
+        height: 24px;
+        width: 100%;
+        background-color: transparent;
+    }
+}
