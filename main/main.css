@@ -36,9 +36,15 @@
 
 /* HEADER */
 
+body {
+    height: 100vh;
+    padding-bottom: 10px;
+}
+
 header{
     width: 100vw;
     border-bottom: 1px solid #a3a3a34d;
+    position: fixed;
 }
 
 .text_desconto{
@@ -139,12 +145,15 @@ header i:active{
     color: var(--hover-button-1);
     transition: 1ms ease;
 }
-
+.container{ 
+    height: 100%; 
+    width: 100%; 
+    background-color: var(--primary-white);
+}
 .footer {
     background-color: var(--button-card);
     height: 440px;
     width: 100vw;
-    position:fixed;
     color: var(--text-1);
     bottom: 0px;
     justify-content: center;
