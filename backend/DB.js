@@ -34,6 +34,36 @@ class DB {
     }
   }
 
+  insertUser = async (userName, userPassword, userEmail, userAddress = '') => {
+    try {
+        // @TODO userAddress
+        const result = await this.connection.query(
+            'INSERT INTO usuario (nome, senha, email) VALUES (?, ?, ?)',
+            [userName, userPassword, userEmail]
+        )
+        return result;
+    } catch(error) {
+        throw error;
+    }
+  }
+
+  userLogin = async (userEmail, userPassword) => {
+    try {
+        const [rows] = await this.connection.query(
+            'SELECT id_usuario, nome, email  FROM usuario WHERE email = ? AND senha = ?', 
+            [userEmail, userPassword]
+        );
+
+        if(rows.length === 0) {
+            throw new Error('Usuário não encontrado ou senha incorreta!');
+        }
+
+        return rows[0];
+    } catch(error) {
+        throw error;
+    }
+  }
+
 }
 
 export default new DB();
