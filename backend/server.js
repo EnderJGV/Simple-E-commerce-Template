@@ -2,8 +2,12 @@ import express from 'express';
 import { configDotenv } from 'dotenv';
 import DB from './DB.js';
 import jwt from 'jsonwebtoken';
+import path from 'path';
 
 const app = express();
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, '../frontend')))
 app.use(express.json());
 
 const { SERVER_PORT, SECRET } = configDotenv().parsed;
@@ -16,8 +20,11 @@ function verifyToken(req, res, next) {
         next();
     })
 }
+app.get('/', (res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+});
 
-app.get('/products', async (req,res) => {
+app.get('/products',verifyToken, async (req,res) => {
     try {
         const data = await DB.getProducts();
 
