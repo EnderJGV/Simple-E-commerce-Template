@@ -7,7 +7,7 @@ import path from 'path';
 const app = express();
 const __dirname = path.resolve();
 
-app.use(express.static(path.join(__dirname, '../frontend')))
+app.use(express.static(path.join(__dirname, '../frontend/public')))
 app.use(express.json());
 
 const { SERVER_PORT, SECRET } = configDotenv().parsed;
@@ -20,9 +20,13 @@ function verifyToken(req, res, next) {
         next();
     })
 }
-app.get('/', (res) => {
-    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
+
+app.post('/createProduct', (req, res) => {
+    res.status(200);
+})
 
 app.get('/products',verifyToken, async (req,res) => {
     try {
@@ -35,6 +39,10 @@ app.get('/products',verifyToken, async (req,res) => {
             message: error.message
         })
     }
+})
+
+app.get('/login', async (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
 
 app.post('/login', async (req, res) => {
@@ -90,6 +98,20 @@ app.post('/user/register', async (req, res) => {
     }
 })
 
-app.listen(SERVER_PORT, () => {
-    console.log(`O Servidor foi iniciado com sucesso e está escutando a porta ${ SERVER_PORT }`);
+// Admin
+app.get('/login', async (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
+
+app.get('/*splat', (req, res) => {
+    res.status(404).sendFile(path.join(__dirname, '../frontend/public/404Error.html'), (err) => {
+        if (err) {
+            console.error('Erro ao enviar o arquivo 404Error.html:', err.message);
+            res.status(500).send('Erro interno do servidor');
+        }
+    });
+});
+
+app.listen(SERVER_PORT, () => {
+    console.log(`O Servidor foi iniciado com sucesso e está escutando a porta ${SERVER_PORT}`);
+});
