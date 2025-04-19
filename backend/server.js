@@ -6,7 +6,7 @@ import path from 'path';
 
 const app = express();
 const __dirname = path.resolve();
-
+app.use('/admin', express.static(path.join(__dirname, 'admin')));
 app.use(express.static(path.join(__dirname, '../frontend/public')))
 app.use(express.json());
 
@@ -23,23 +23,6 @@ function verifyToken(req, res, next) {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
-
-app.post('/createProduct', (req, res) => {
-    res.status(200);
-})
-
-app.get('/products',verifyToken, async (req,res) => {
-    try {
-        const data = await DB.getProducts();
-
-        return res.json({message: data})
-    }catch(error){
-        return res.json({
-            error: true,
-            message: error.message
-        })
-    }
-})
 
 app.get('/login', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
@@ -98,10 +81,117 @@ app.post('/user/register', async (req, res) => {
     }
 })
 
-// Admin
 app.get('/login', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
+// Admin
+app.get('/admin', (req,res) => {
+    res.sendFile(path.join(__dirname, 'admin/index.html'));
+})
+
+app.get('/admin/createProduct', (req,res) => {
+    res.sendFile(path.join(__dirname, 'admin/createProduct.html'));
+})
+
+app.get('/admin/createCategory', (req,res) => {
+    res.sendFile(path.join(__dirname, 'admin/createCategory.html'));
+})
+
+// API
+app.post('/api/createCategory', async (req,res) => {
+    try{
+        const { name, image, status } = req.body || {};
+
+        if(!name) {
+            throw new Error('Nome da categoria não informado');
+        }
+
+        const result = await DB.insertCategory({
+            nome: name,
+            imagem: image ?? '',
+            status: status ?? '',
+        });
+
+        res.status(200).send({
+            error: false,
+            category: result,
+        });
+    } catch(error) {
+        res.status(200).send({
+            error: true,
+            message: error.message
+        });
+    }
+});
+
+app.post('/api/createProduct', async (req, res) => {
+    try {
+        const product = req.body || {};
+        if (!product.name || !product.category || !product.quantity) {
+            throw new Error("Nome, quantidade ou categoria do produto não foram informados");
+        }
+    
+        await DB.insertProduct({
+            nome: product.name,
+            descricao: '',
+            quantidade: product.quantity,
+            preco: product.price,
+            cdCategoria: product.category,
+            imagem: ''
+        });
+    
+        res.status(200).send({
+            error: false,
+            product
+        });
+
+    } catch (error) {
+        res.status(200).send({
+            error: true,
+            message: error.message
+        });
+    }
+});
+
+app.get('/api/products', async (req,res) => {
+    try {
+        const data = await DB.getProducts();
+        res.json({
+            error: false,
+            data
+        })
+
+    }catch(error){
+        res.json({
+            error: true,
+            message: error.message
+        })
+    }
+})
+
+app.get('/api/getCategories', async (req,res)=> {
+    try {
+        const result = await DB.getCategories();
+        
+        res.status(200).send({
+            error: false,
+            data: result
+        })
+
+    } catch(error) {
+        res.status(200).send({
+            error: true,
+            message: error.message
+        });
+    }
+})
+
+app.all('/api/*splat', (req, res) => {
+    res.status(404).send({
+        error: true,
+        message: 'Recurso não encontrado, verifique a url informada'
+    });
+});
 
 app.get('/*splat', (req, res) => {
     res.status(404).sendFile(path.join(__dirname, '../frontend/public/404Error.html'), (err) => {
@@ -112,6 +202,6 @@ app.get('/*splat', (req, res) => {
     });
 });
 
-app.listen(SERVER_PORT, () => {
+app.listen(SERVER_PORT, '0.0.0.0', () => {
     console.log(`O Servidor foi iniciado com sucesso e está escutando a porta ${SERVER_PORT}`);
 });

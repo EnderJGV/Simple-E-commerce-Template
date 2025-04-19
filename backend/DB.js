@@ -19,16 +19,21 @@ class DB {
   getProducts = async () => {
     try {
         const [ results ] = await this.connection.query(
-            'SELECT * FROM produto'
+            `
+            SELECT 
+                p.cd_produto AS cdProduto,
+                p.nome AS nome,
+                c.nome AS categoria,
+                p.imagem AS imagem
+            FROM 
+                produto p
+            INNER JOIN 
+                categoria c
+            ON
+                p.cd_categoria = c.cd_categoria
+            `
         )
-        return {
-            error: false,
-            data: results,
-            pagination: {
-                page: 1,
-                total: results.length
-            }
-        };
+        return results;
     } catch(error) {
         throw error;
     }
@@ -64,6 +69,57 @@ class DB {
     }
   }
 
+  insertProduct = async (params) => {
+    try {
+        const result = this.connection.query(
+            'INSERT INTO Produto (nome, descricao, preco, cd_categoria, imagem) VALUES (?,?,?,?,?)',
+            [
+                params.nome,
+                params.descricao ?? '',
+                params.preco ?? 0,
+                params.cdCategoria,
+                params.imagem ?? ''
+            ]
+        )
+
+        return result;
+    } catch(error) {
+        throw new Error('Houve um erro ao inserir produto' + error);
+    }
+  }
+
+  insertCategory = async (params) => {
+    try {
+        const [result] = await this.connection.query('INSERT INTO Categoria (nome,imagem,estado) VALUES (?,?,?)', [
+            params.nome,
+            params.imagem ?? null,
+            params.status ?? 'inativo'
+        ]);
+
+        if(result.affectedRows === 0) {
+            throw new Error('Erro Desconhecido.')
+
+        } 
+
+        return {
+            nome: params.nome,
+            imagem: params.image,
+            status: params.status,
+            cdCategoria: result.insertId
+        }
+    } catch(error) {
+        throw new Error('Houve um erro ao criar categoria' + error)
+    }
+  }
+
+  getCategories = async () => {
+    try {
+        const [rows] = await this.connection.query('SELECT cd_categoria AS cdCategoria, nome, imagem FROM Categoria');
+        return rows;
+    }catch(error) {
+        throw error;
+    }
+  }
 }
 
 export default new DB();
