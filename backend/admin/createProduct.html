@@ -7,7 +7,6 @@
     <title>Painel administrativo</title>
 </head>
 <body>
-    <div class="notifications" id="notifications"></div>
     <div class="menu">
         <div class="menu-item">
             Início
@@ -28,8 +27,9 @@
     <div class="container">
         <div class="card">
             <form id="productForm">
-                <div class="product-image-input image">
+                <div class="product-image-input image" id="product-image-input">
                     <span>Selecionar Imagem</span>
+                    <input id="hidden-file-input" type="file" accept="image/png, image/jpeg" style="display: none;">
                 </div>
                 <div class="input-container name">
                     <label >Nome</label>
@@ -56,7 +56,7 @@
         <div class="card">
             <table>
                 <thead>
-                    <tr><td>Código do produto</td><td>Nome</td><td>Categoria</td></tr>
+                    <tr><td>Código do produto</td><td>Nome</td><td>Categoria</td><td>Ações</td></tr>
                 </thead>
                 <tbody id="table-products">
                 </tbody>

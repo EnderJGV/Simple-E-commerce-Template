@@ -186,6 +186,23 @@ app.get('/api/getCategories', async (req,res)=> {
     }
 })
 
+app.post('/api/deleteProduct', async (req, res) => {
+    try {
+        const { cdProduto } = req.body || {};
+        await DB.deleteProduct(cdProduto)
+
+        res.status(200).send({
+            error: false
+        });
+
+    } catch (error) {
+        res.status(200).send({
+            error: true,
+            message: error.message
+        })
+    }
+})
+
 app.all('/api/*splat', (req, res) => {
     res.status(404).send({
         error: true,

@@ -8,7 +8,11 @@ class Notifications {
     }
 
     constructor() {
-        Notifications.container = document.getElementById('notifications');
+        if(!Notifications.container) {
+            Notifications.container = document.createElement('div');
+            Notifications.container.className= 'notifications';
+            document.body.appendChild(Notifications.container);
+        };
     }
 
     removeNotification(node){

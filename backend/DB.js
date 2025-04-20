@@ -120,6 +120,18 @@ class DB {
         throw error;
     }
   }
+
+  deleteProduct = async(cdProduto) => {
+    try {
+        const [affectedRows] = await this.connection.query('DELETE FROM Produto WHERE cd_produto = (?)',[cdProduto]);
+        if(affectedRows === 0) {
+            throw new Error('Produto não encontrado');
+        }
+        return;
+    } catch(error) {
+        throw error;
+    }
+  }
 }
 
 export default new DB();
