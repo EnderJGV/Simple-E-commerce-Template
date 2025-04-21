@@ -77,6 +77,14 @@ table {
     align-items: center;
 }
 
+.container > * {
+    margin-bottom: 10px;
+}
+
+.container > *:last-child{
+    margin-bottom: 0px;
+}
+
 .notifications {
     width: 300px;
     box-sizing: border-box;

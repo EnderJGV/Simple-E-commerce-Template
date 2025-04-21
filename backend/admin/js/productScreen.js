@@ -4,7 +4,6 @@ import Confirmation from "./Confirmation.js";
 const form = document.getElementById('productForm');
 const btnCadastrar = document.getElementById('btnCadastro');
 const inputFile = document.getElementById('product-image-input');
-
 inputFile.addEventListener('click',inputFileClick)
 
 var notificationSystem = new Notifications();
@@ -38,11 +37,21 @@ function inputFileClick() {
 }
 
 
+function readFileAsBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+    });
+}
+
 btnCadastrar.onclick = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries());
+    let image = '';
 
     if (!data.nome || !data.quantidade || !data.preco || !data.categoria) {
         notificationSystem.addNotification(
@@ -53,16 +62,22 @@ btnCadastrar.onclick = async (event) => {
         return;
     }
 
+    if(data.image) {
+        image = await readFileAsBase64(data.image);
+    }
+
     const params  = {
         name: data.nome,
         //description: 
         price: data.preco,
         quantity: data.quantidade,
         category: data.categoria,
-        // image:
+        image,
     }
+
     try {
         await createProduct(params);
+        form.reset();
         await loadProductsTable();
         notificationSystem.addNotification('Produto cadastrado', `O Produto ${data.nome} foi cadastrado.`, { color: 'success' });
     } catch(error) {

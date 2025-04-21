@@ -3,14 +3,16 @@ import { configDotenv } from 'dotenv';
 import DB from './DB.js';
 import jwt from 'jsonwebtoken';
 import path from 'path';
+import fs from 'fs';
 
 const app = express();
 const __dirname = path.resolve();
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 app.use(express.static(path.join(__dirname, '../frontend/public')))
-app.use(express.json());
+app.use(express.json({ limit: '20mb' }));
 
-const { SERVER_PORT, SECRET } = configDotenv().parsed;
+const { SERVER_PORT, SECRET, UPLOADS_PATH } = configDotenv().parsed;
+app.use(UPLOADS_PATH, express.static(path.join(__dirname, UPLOADS_PATH)));
 
 function verifyToken(req, res, next) {
     const token = req.headers['x-access-token'];
@@ -20,6 +22,20 @@ function verifyToken(req, res, next) {
         next();
     })
 }
+
+async function saveImage(imageBase64) {
+    const matches = imageBase64.match(/^data:image\/(\w+);base64,/);
+    const extension = matches ? matches[1] : 'png';
+    const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    const fileName = `${Date.now()}.${extension}`;
+    const uploadPath = path.join(__dirname, UPLOADS_PATH, fileName);
+    fs.writeFileSync(uploadPath, buffer);
+    const imagePath = `${UPLOADS_PATH}/${fileName}`;
+    const result = await DB.insertImage(fileName, imagePath);
+    return result;
+}
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
@@ -127,17 +143,22 @@ app.post('/api/createCategory', async (req,res) => {
 app.post('/api/createProduct', async (req, res) => {
     try {
         const product = req.body || {};
+        let image = ''
         if (!product.name || !product.category || !product.quantity) {
             throw new Error("Nome, quantidade ou categoria do produto não foram informados");
         }
-    
+
+        if (product.image) {
+            image = await saveImage(product.image)
+        }
+
         await DB.insertProduct({
             nome: product.name,
             descricao: '',
             quantidade: product.quantity,
             preco: product.price,
             cdCategoria: product.category,
-            imagem: ''
+            cdImagem: image.cdImagem ?? null,
         });
     
         res.status(200).send({
