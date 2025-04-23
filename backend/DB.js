@@ -43,12 +43,12 @@ class DB {
     }
   }
 
-  insertUser = async (userName, userPassword, userEmail, userAddress = '') => {
+  insertUser = async (userName, userlastName, userPassword, userEmail, userAddress = '') => {
     try {
         // @TODO userAddress
         const result = await this.connection.query(
-            'INSERT INTO usuario (nome, senha, email) VALUES (?, ?, ?)',
-            [userName, userPassword, userEmail]
+            'INSERT INTO usuario (nome, sobrenome, senha, email) VALUES (?, ?, ?)',
+            [userName, userlastName, userPassword, userEmail]
         )
         return result;
     } catch(error) {

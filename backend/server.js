@@ -40,10 +40,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/login', async (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
-})
-
 app.post('/login', async (req, res) => {
     try {
         const { userEmail, userPassword } = req.body || {};
@@ -62,18 +58,22 @@ app.post('/login', async (req, res) => {
             message: error.message
         })
     }
+});
+
+app.post('/user/updateUser', async (req,res) => {
+    res.send(req.body);
 })
 
 app.post('/user/register', async (req, res) => {
     try {
-        const { userName, userPassword, userEmail, userAddress } = req.body || {};
+        const { userName, userPassword, userEmail, userAddress, userLastName } = req.body || {};
         if( !userName || !userPassword || !userEmail ) {
             return res.json({
                 error: true,
                 message: 'Um ou mais campos obrigatórios não foram informados. Verfique os dados digitados e tente novamente',
             });
         }
-       const result = await DB.insertUser(userName, userPassword, userEmail, userAddress);
+       const result = await DB.insertUser(userName, userLastName, userPassword, userEmail, userAddress);
 
        if(result.rowsAffected === 1) {
          return res.status(200).json({
