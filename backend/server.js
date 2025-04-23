@@ -100,6 +100,10 @@ app.post('/user/register', async (req, res) => {
 app.get('/login', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
+
+app.get('/user/profile', async(req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/account.html'));
+})
 // Admin
 app.get('/admin', (req,res) => {
     res.sendFile(path.join(__dirname, 'admin/index.html'));
