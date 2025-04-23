@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css"/>
+    <title>Painel administrativo</title>
+</head>
+<body>
+    <div class="menu">
+        <div class="menu-item" onclick="window.location.href = '/admin'">
+            Início
+        </div>
+        <div class="menu-item" onclick="window.location.href = '/admin/createProduct'">
+            Cadastrar Produtos
+        </div>
+        <div class="menu-item" onclick="window.location.href = '/admin/createCategory'">
+            Cadastrar Categoria
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <form id="productForm">
+                <div class="product-image-input image" id="product-image-input">
+                    <span>Selecionar Imagem</span>
+                    <input id="hidden-file-input" name="image" type="file" accept="image/png, image/jpeg" style="display: none;">
+                </div>
+                <div class="input-container name">
+                    <label >Nome</label>
+                    <input name="nome" type="text"></label>
+                </div>
+                <div class="input-container price">
+                    <label >Preço</label>
+                    <input name="preco" type="text"></label>
+                </div>
+                <div class="input-container quantity">
+                    <label>Quantidade</label>
+                    <input name="quantidade" type="text"></label>
+                </div>
+                <div class="input-container category">
+                    <label>Categoria</label>
+                    <select  name="categoria" type="text">
+                    </select>
+                </div>
+            </form>
+            <div class="card-footer">
+                <button class="button-1" id="btnCadastro">Cadastrar</button>
+            </div>
+        </div>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr><td>Código do produto</td><td>Nome</td><td>Categoria</td><td>Ações</td></tr>
+                </thead>
+                <tbody id="table-products">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script type="module" src="js/productScreen.js"></script>
+</html>
