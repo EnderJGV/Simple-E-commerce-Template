@@ -23,7 +23,7 @@ function verifyToken(req, res, next) {
     })
 }
 
-async function saveImage(imageBase64) {
+async function saveImage(imageBase64, cdProduto) {
     const matches = imageBase64.match(/^data:image\/(\w+);base64,/);
     const extension = matches ? matches[1] : 'png';
     const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
@@ -32,7 +32,7 @@ async function saveImage(imageBase64) {
     const uploadPath = path.join(__dirname, UPLOADS_PATH, fileName);
     fs.writeFileSync(uploadPath, buffer);
     const imagePath = `${UPLOADS_PATH}/${fileName}`;
-    const result = await DB.insertImage(fileName, imagePath);
+    const result = await DB.insertImage(fileName, imagePath, cdProduto);
     return result;
 }
 
@@ -61,7 +61,19 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/user/updateUser', async (req,res) => {
-    res.send(req.body);
+    try {
+        const {userName, userLastName, userEmail, userAdress, userPassword, userNewPassWord} = req.body || {};
+        const  payload = {
+            nome: userName,
+            sobrenome: userLastName,
+            email: userEmail,
+            endereco: userAdress,
+            senha: userNewPassWord,
+        }
+        const response = await DB.updateUser()
+    } catch {
+
+    }
 })
 
 app.post('/user/register', async (req, res) => {
@@ -147,23 +159,21 @@ app.post('/api/createCategory', async (req,res) => {
 app.post('/api/createProduct', async (req, res) => {
     try {
         const product = req.body || {};
-        let image = ''
         if (!product.name || !product.category || !product.quantity) {
             throw new Error("Nome, quantidade ou categoria do produto não foram informados");
         }
 
-        if (product.image) {
-            image = await saveImage(product.image)
-        }
-
-        await DB.insertProduct({
+        const { cdProduto } = await DB.insertProduct({
             nome: product.name,
             descricao: '',
             quantidade: product.quantity,
             preco: product.price,
             cdCategoria: product.category,
-            cdImagem: image.cdImagem ?? null,
         });
+
+        if (product.image) {
+            await saveImage(producxt.image, cdProduto)
+        }
     
         res.status(200).send({
             error: false,

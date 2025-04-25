@@ -13,21 +13,35 @@ document.addEventListener('DOMContentLoaded', () => {
     loadProductsTable()
 });
 
-function handleFileSelection(input) {
-    const file = input.files[0];
-    if(file) {
-        const reader = new FileReader();
-        reader.onload = (e)=> {
-            const imgUrl = e.currentTarget.result;
-            inputFile.style.backgroundImage = `url(${imgUrl})`;
-            inputFile.style.backgroundSize = 'cover';
-            inputFile.style.backgroundPosition = 'center';
-            inputFile.style.backgroundRepeat = 'no-repeat';
-        }
+function renderProductsImage(imageBase64, fileName, fileSize, fileType) {
+    const container = document.querySelector('div[class=product-images-container]');
+    const row = document.createElement('div');
+    const text = document.createElement('span');
+    const img = document.createElement('img');
+    row.style.display = 'flex';
+    row.style.alignItems = 'center';
 
+    const fileSizeKB = (fileSize / 1024).toFixed(2);
+    text.innerText = `${fileName} - ${fileSizeKB} KB - ${fileType}`;
+    text.style.fontSize = 'xx-small';
+    img.src = `${imageBase64}`;
+    img.style.width = '20px';
+    img.style.height = '20px';
+    row.appendChild(img)
+    row.appendChild(text);
+    container.appendChild(row);
+}
+
+function handleFileSelection(input) {
+    
+    const files = input.files;
+    for ( const file  of files) {
+        const reader = new FileReader();
+            reader.onload = (e)=> {
+                renderProductsImage(e.currentTarget.result, file.name, file.size, file.type);
+            }
         reader.readAsDataURL(file);
     }
-
 }
 
 function inputFileClick() {

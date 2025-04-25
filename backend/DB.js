@@ -34,7 +34,7 @@ class DB {
             LEFT JOIN
                 imagens i
             ON 
-                p.cd_imagem = i.cd_imagem
+                i.cd_imagem = p.cd_imagem
             `
         )
         return results;
@@ -76,26 +76,25 @@ class DB {
   insertProduct = async (params) => {
     try {
         const result = this.connection.query(
-            'INSERT INTO Produto (nome, descricao, preco, cd_categoria, cd_imagem) VALUES (?,?,?,?,?)',
+            'INSERT INTO Produto (nome, descricao, preco, cd_categoria) VALUES (?,?,?,?)',
             [
                 params.nome,
                 params.descricao ?? null,
                 params.preco ?? 0,
                 params.cdCategoria,
-                params.cdImagem ?? null
             ]
-        )
+        );
 
-        return result;
+        return { cdProduto: result.insertId };
     } catch(error) {
         throw new Error('Houve um erro ao inserir produto' + error);
     }
   }
 
-  insertImage = async (imageName, imagePath) => {
+  insertImage = async (imageName, imagePath, cdProduto) => {
     try {
-        const [result] = await this.connection.query('INSERT INTO Imagens (nome,caminho) VALUES (?, ?)',
-            [imageName, imagePath]
+        const [result] = await this.connection.query('INSERT INTO Imagem (nome,caminho,cd_produto) VALUES (?, ?, ?)',
+            [imageName, imagePath, cdProduto]
         );
 
         return {
