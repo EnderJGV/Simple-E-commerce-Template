@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "buildDB": "echo \"Rodando script de criação do banco de dados\" && node buildDb.js && nodemon server.js"
   },
   "author": "Anderson Rocha, Dyullia Edla, Ender Josué,  Igor Augusto, Rosiane das Dores, William Kleiber",
   "license": "ISC",
