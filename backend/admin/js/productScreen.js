@@ -3,14 +3,15 @@ import Confirmation from "./Confirmation.js";
 
 const form = document.getElementById('productForm');
 const btnCadastrar = document.getElementById('btnCadastro');
-const inputFile = document.getElementById('product-image-input');
-inputFile.addEventListener('click',inputFileClick)
 
 var notificationSystem = new Notifications();
 var modalSystem = new Confirmation();
 document.addEventListener('DOMContentLoaded', () => {
     fillCategories()
     loadProductsTable()
+    document.getElementById('product-image-input')
+        .addEventListener('click', inputFileClick);
+    document.querySelector('input[type=file]').addEventListener('change', handleFileSelection);
 });
 
 function renderProductsImage(imageBase64, fileName, fileSize, fileType) {
@@ -32,9 +33,7 @@ function renderProductsImage(imageBase64, fileName, fileSize, fileType) {
     container.appendChild(row);
 }
 
-function handleFileSelection(input) {
-    
-    const files = input.files;
+async function handleFileSelection({ currentTarget: { files } }) {
     for ( const file  of files) {
         const reader = new FileReader();
             reader.onload = (e)=> {
@@ -45,11 +44,8 @@ function handleFileSelection(input) {
 }
 
 function inputFileClick() {
-    const input = document.querySelector('input[type=file]');
-    input.addEventListener('change',() => handleFileSelection(input), false);
-    input.click();
+    document.querySelector('input[type=file]').click();
 }
-
 
 function readFileAsBase64(file) {
     return new Promise((resolve, reject) => {
@@ -65,7 +61,15 @@ btnCadastrar.onclick = async (event) => {
 
     const formData = new FormData(form)
     const data = Object.fromEntries(formData.entries());
-    let image = '';
+    const input = document.querySelector('input[type=file]');
+    let images = [];
+
+    if(input.files.length > 0) {
+        for (const file of input.files) {
+           const img = await readFileAsBase64(file);
+           images.push(img);
+        }
+    }
 
     if (!data.nome || !data.quantidade || !data.preco || !data.categoria) {
         notificationSystem.addNotification(
@@ -76,17 +80,13 @@ btnCadastrar.onclick = async (event) => {
         return;
     }
 
-    if(data.image) {
-        image = await readFileAsBase64(data.image);
-    }
-
     const params  = {
         name: data.nome,
         //description: 
         price: data.preco,
         quantity: data.quantidade,
         category: data.categoria,
-        image,
+        images,
     }
 
     try {

@@ -23,17 +23,30 @@ function verifyToken(req, res, next) {
     })
 }
 
-async function saveImage(imageBase64, cdProduto) {
+async function saveImage(imageBase64) {
     const matches = imageBase64.match(/^data:image\/(\w+);base64,/);
     const extension = matches ? matches[1] : 'png';
     const base64Data = imageBase64.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
     const fileName = `${Date.now()}.${extension}`;
     const uploadPath = path.join(__dirname, UPLOADS_PATH, fileName);
-    fs.writeFileSync(uploadPath, buffer);
+    await fs.promises.writeFile(uploadPath, buffer);
     const imagePath = `${UPLOADS_PATH}/${fileName}`;
-    const result = await DB.insertImage(fileName, imagePath, cdProduto);
-    return result;
+    return {
+        name: fileName,
+        imagePath: imagePath,
+    };
+}
+
+async function saveAllImages(images, cdProduto) {
+    const images = Array.isArray(images) ? images : [images];
+
+    await Promise.all(
+            images.map(async (image) => {
+                const {name, imagePath} = saveImage(image, cdProduto);
+                DB.insertImage(name, imagePath, cdProduto)
+            }),
+    );
 }
 
 app.get('/', (req, res) => {
@@ -171,8 +184,8 @@ app.post('/api/createProduct', async (req, res) => {
             cdCategoria: product.category,
         });
 
-        if (product.image) {
-            await saveImage(producxt.image, cdProduto)
+        if (product.images) {
+           await saveAllImages(product.images, cdProduto)
         }
     
         res.status(200).send({
