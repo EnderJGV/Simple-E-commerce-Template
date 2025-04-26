@@ -8,12 +8,18 @@ class DB {
     constructor (){
         mysql.createConnection({
             host: DB_HOST,
-            password: DB_PASSWORD,
             user: DB_USER,
-            database: DB_NAME
+            database: DB_NAME,
         }).then((connect) =>{
             this.connection = connect;
+        }).catch((error)=> {
+            const erros = {
+                ER_ACCESS_DENIED_ERROR: 'Acesso negado, verifique as credenciais do banco informadas no .env',
+            };
+            console.log(`\x1b[31m${erros[error.code]}\x1b[0m`);
         });
+
+            
     }
 
   getProducts = async () => {
