@@ -39,22 +39,17 @@ async function saveImage(imageBase64) {
 }
 async function deleteProduct(cdProduto) {
     try {
-        const images = DB.getImageByProductId(cdProduto);
+        const images = DB.getImageByCdProduto(cdProduto);
   
         const deleteImagePromises = images.map(img => {
-        const filePath = path.join('caminho/da/pasta', img.caminho);
+        const filePath = path.join(__dirname, img.caminho);
         return fs.unlink(filePath).catch(error => {
             console.error(`Erro ao deletar a imagem ${img.caminho}:`, error);
         });
     });
   
       await Promise.all(deleteImagePromises);
-  
-      await DB.deleteImageByCdProduto(cdProduto);
-      await this.connection.query(
-        `DELETE FROM produto WHERE cd_produto = ?`,
-        [productId]
-      );
+      DB.deleteProduct(cdProduto);
       return;
     } catch (error) {
       throw error;
@@ -63,7 +58,6 @@ async function deleteProduct(cdProduto) {
 
 async function saveAllImages(images, cdProduto) {
     const imgs = Array.isArray(images) ? images : [images];
-    console.log(cdProduto);
     await Promise.all(
             imgs.map(async (image) => {
                 const {name, imagePath} = await saveImage(image, cdProduto);
@@ -260,7 +254,7 @@ app.get('/api/getCategories', async (req,res)=> {
 app.post('/api/deleteProduct', async (req, res) => {
     try {
         const { cdProduto } = req.body || {};
-        await DB.deleteProduct(cdProduto)
+        await deleteProduct(cdProduto)
 
         res.status(200).send({
             error: false
