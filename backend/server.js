@@ -39,17 +39,18 @@ async function saveImage(imageBase64) {
 }
 async function deleteProduct(cdProduto) {
     try {
-        const images = DB.getImageByCdProduto(cdProduto);
+        const images = await DB.getImageByCdProduto(cdProduto);
   
         const deleteImagePromises = images.map(img => {
-        const filePath = path.join(__dirname, img.caminho);
-        return fs.unlink(filePath).catch(error => {
-            console.error(`Erro ao deletar a imagem ${img.caminho}:`, error);
+            const filePath = path.join(__dirname, img.caminho);
+            return fs.unlink(filePath, (err)=> {
+                if (err && err.code === 'ENOENT') console.log(`Arquivo não encontrado no caminho ${img.caminho}.`);
+            })
         });
-    });
-  
+
+      await DB.deleteImageByCdProduto(cdProduto);
       await Promise.all(deleteImagePromises);
-      DB.deleteProduct(cdProduto);
+      await DB.deleteProduct(cdProduto);
       return;
     } catch (error) {
       throw error;
