@@ -24,7 +24,7 @@ class DB {
                 p.cd_produto AS cdProduto,
                 p.nome AS nome,
                 c.nome AS categoria,
-                i.caminho AS imagem
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
             FROM 
                 produto p
             LEFT JOIN 
@@ -35,8 +35,11 @@ class DB {
                 imagens i
             ON 
                 i.cd_imagem = p.cd_imagem
+            GROUP BY
+                p.cd_produto, p.nome, c.nome;
             `
-        )
+        );
+
         return results;
     } catch(error) {
         throw error;
@@ -75,7 +78,7 @@ class DB {
 
   insertProduct = async (params) => {
     try {
-        const result = this.connection.query(
+        const [result] = await this.connection.query(
             'INSERT INTO Produto (nome, descricao, preco, cd_categoria) VALUES (?,?,?,?)',
             [
                 params.nome,
@@ -84,8 +87,9 @@ class DB {
                 params.cdCategoria,
             ]
         );
-
-        return { cdProduto: result.insertId };
+        return { 
+            cdProduto: result.insertId
+         };
     } catch(error) {
         throw new Error('Houve um erro ao inserir produto' + error);
     }
@@ -93,7 +97,7 @@ class DB {
 
   insertImage = async (imageName, imagePath, cdProduto) => {
     try {
-        const [result] = await this.connection.query('INSERT INTO Imagem (nome,caminho,cd_produto) VALUES (?, ?, ?)',
+        const [result] = await this.connection.query('INSERT INTO Imagens (nome,caminho,cd_produto) VALUES (?, ?, ?)',
             [imageName, imagePath, cdProduto]
         );
 
@@ -103,6 +107,31 @@ class DB {
         }
     } catch(error) {
         throw error
+    }
+  }
+
+  getImageByProductId = async (productId) => {
+    try {
+        const [result] = await this.connection.query(
+            `SELECT caminho FROM imagens WHERE cd_produto = ?`,
+            [productId]
+          );
+        return result;
+    } catch (error) {
+        throw error;
+    }
+  }
+
+  deleteImageByCdProduto = async (cdProduto) => {
+    try {
+        const [result] = await this.connection.query(
+            `DELETE FROM imagens WHERE cd_produto = ?`,
+            [productId]
+          );
+
+        return result;
+    } catch (error) {
+        throw error;
     }
   }
 

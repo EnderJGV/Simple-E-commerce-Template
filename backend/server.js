@@ -37,14 +37,37 @@ async function saveImage(imageBase64) {
         imagePath: imagePath,
     };
 }
+async function deleteProduct(cdProduto) {
+    try {
+        const images = DB.getImageByProductId(cdProduto);
+  
+        const deleteImagePromises = images.map(img => {
+        const filePath = path.join('caminho/da/pasta', img.caminho);
+        return fs.unlink(filePath).catch(error => {
+            console.error(`Erro ao deletar a imagem ${img.caminho}:`, error);
+        });
+    });
+  
+      await Promise.all(deleteImagePromises);
+  
+      await DB.deleteImageByCdProduto(cdProduto);
+      await this.connection.query(
+        `DELETE FROM produto WHERE cd_produto = ?`,
+        [productId]
+      );
+      return;
+    } catch (error) {
+      throw error;
+    }
+  }
 
 async function saveAllImages(images, cdProduto) {
     const imgs = Array.isArray(images) ? images : [images];
-
+    console.log(cdProduto);
     await Promise.all(
             imgs.map(async (image) => {
-                const {name, imagePath} = saveImage(image, cdProduto);
-                DB.insertImage(name, imagePath, cdProduto)
+                const {name, imagePath} = await saveImage(image, cdProduto);
+                await DB.insertImage(name, imagePath, cdProduto)
             }),
     );
 }
