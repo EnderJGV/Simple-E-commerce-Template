@@ -41,7 +41,7 @@ class DB {
             LEFT JOIN
                 imagens i
             ON 
-                i.cd_imagem = p.cd_imagem
+                p.cd_produto = i.cd_produto
             GROUP BY
                 p.cd_produto, p.nome, c.nome;
             `
