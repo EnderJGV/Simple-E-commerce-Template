@@ -63,7 +63,6 @@ async function deleteProduct(cdProduto) {
 
 async function saveAllImages(images, cdProduto) {
     const imgs = Array.isArray(images) ? images : [images];
-    console.log(cdProduto);
     await Promise.all(
             imgs.map(async (image) => {
                 const {name, imagePath} = await saveImage(image, cdProduto);
