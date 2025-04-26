@@ -17,7 +17,7 @@ class DB {
             const erros = {
                 ER_ACCESS_DENIED_ERROR: 'Acesso negado, verifique as credenciais do banco informadas no .env',
             };
-            console.log(`\x1b[31m${erros[error.code]}\x1b[0m`);
+            console.log(`\x1b[31m${erros[error.code] || 'Erro desconhecido ao conectar com o banco de dados.' }\x1b[0m`);
         });
 
             
@@ -117,11 +117,11 @@ class DB {
     }
   }
 
-  getImageByProductId = async (productId) => {
+  getImageByCdProduto = async (cdProduto) => {
     try {
         const [result] = await this.connection.query(
             `SELECT caminho FROM imagens WHERE cd_produto = ?`,
-            [productId]
+            [cdProduto]
           );
         return result;
     } catch (error) {
@@ -133,7 +133,7 @@ class DB {
     try {
         const [result] = await this.connection.query(
             `DELETE FROM imagens WHERE cd_produto = ?`,
-            [productId]
+            [cdProduto]
           );
 
         return result;
