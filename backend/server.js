@@ -39,10 +39,10 @@ async function saveImage(imageBase64) {
 }
 
 async function saveAllImages(images, cdProduto) {
-    const images = Array.isArray(images) ? images : [images];
+    const imgs = Array.isArray(images) ? images : [images];
 
     await Promise.all(
-            images.map(async (image) => {
+            imgs.map(async (image) => {
                 const {name, imagePath} = saveImage(image, cdProduto);
                 DB.insertImage(name, imagePath, cdProduto)
             }),
