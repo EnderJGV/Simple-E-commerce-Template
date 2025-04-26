@@ -10,6 +10,7 @@ class DB {
             host: DB_HOST,
             user: DB_USER,
             database: DB_NAME,
+            password: DB_PASSWORD
         }).then((connect) =>{
             this.connection = connect;
         }).catch((error)=> {
