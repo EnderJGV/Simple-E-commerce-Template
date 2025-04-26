@@ -19,27 +19,36 @@ class DB {
   getProducts = async () => {
     try {
         const [ results ] = await this.connection.query(
-            'SELECT * FROM produto'
+            `
+            SELECT 
+                p.cd_produto AS cdProduto,
+                p.nome AS nome,
+                c.nome AS categoria,
+                i.caminho AS imagem
+            FROM 
+                produto p
+            LEFT JOIN 
+                categoria c
+            ON
+                p.cd_categoria = c.cd_categoria
+            LEFT JOIN
+                imagens i
+            ON 
+                i.cd_imagem = p.cd_imagem
+            `
         )
-        return {
-            error: false,
-            data: results,
-            pagination: {
-                page: 1,
-                total: results.length
-            }
-        };
+        return results;
     } catch(error) {
         throw error;
     }
   }
 
-  insertUser = async (userName, userPassword, userEmail, userAddress = '') => {
+  insertUser = async (userName, userlastName, userPassword, userEmail, userAddress = '') => {
     try {
         // @TODO userAddress
         const result = await this.connection.query(
-            'INSERT INTO usuario (nome, senha, email) VALUES (?, ?, ?)',
-            [userName, userPassword, userEmail]
+            'INSERT INTO usuario (nome, sobrenome, senha, email) VALUES (?, ?, ?)',
+            [userName, userlastName, userPassword, userEmail]
         )
         return result;
     } catch(error) {
@@ -64,6 +73,83 @@ class DB {
     }
   }
 
+  insertProduct = async (params) => {
+    try {
+        const result = this.connection.query(
+            'INSERT INTO Produto (nome, descricao, preco, cd_categoria) VALUES (?,?,?,?)',
+            [
+                params.nome,
+                params.descricao ?? null,
+                params.preco ?? 0,
+                params.cdCategoria,
+            ]
+        );
+
+        return { cdProduto: result.insertId };
+    } catch(error) {
+        throw new Error('Houve um erro ao inserir produto' + error);
+    }
+  }
+
+  insertImage = async (imageName, imagePath, cdProduto) => {
+    try {
+        const [result] = await this.connection.query('INSERT INTO Imagem (nome,caminho,cd_produto) VALUES (?, ?, ?)',
+            [imageName, imagePath, cdProduto]
+        );
+
+        return {
+            cdImagem: result.insertId,
+            imagePath,
+        }
+    } catch(error) {
+        throw error
+    }
+  }
+
+  insertCategory = async (params) => {
+    try {
+        const [result] = await this.connection.query('INSERT INTO Categoria (nome,imagem,estado) VALUES (?,?,?)', [
+            params.nome,
+            params.imagem ?? null,
+            params.status ?? 'inativo'
+        ]);
+
+        if(result.affectedRows === 0) {
+            throw new Error('Erro Desconhecido.')
+
+        } 
+
+        return {
+            nome: params.nome,
+            imagem: params.image,
+            status: params.status,
+            cdCategoria: result.insertId
+        }
+    } catch(error) {
+        throw new Error('Houve um erro ao criar categoria' + error)
+    }
+  }
+
+  getCategories = async () => {
+    try {
+        const [rows] = await this.connection.query('SELECT cd_categoria AS cdCategoria, nome, imagem FROM Categoria');
+        return rows;
+    }catch(error) {
+        throw error;
+    }
+  }
+
+  deleteProduct = async(cdProduto) => {
+    try {
+        const [affectedRows] = await this.connection.query('DELETE FROM Produto WHERE cd_produto = (?)',[cdProduto]);
+        if(affectedRows === 0) {
+            throw new Error('Produto não encontrado');
+        }
+        return;
+    } catch(error) {
+        throw error;
+    }
+  }
 }
 
 export default new DB();
