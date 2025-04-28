@@ -287,7 +287,7 @@ header i:active{
 
 .menu-banner-content{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -298,8 +298,9 @@ header i:active{
 /* Section de flash sales */
 .flash-sales{
     margin-top: 1rem;
-    margin-bottom: 5rem;
     padding: 2rem;
+    border-bottom: 1px;
+    border-bottom: 1px solid #a3a3a34d;
 }
 
 .flash-sales-title div span{
@@ -320,8 +321,9 @@ header i:active{
 
 .flash-sales-content{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .flash-sales-content h3{
@@ -350,7 +352,8 @@ header i:active{
     font-weight: 800;
 }
 
-.setas #fa-arrow-left_setas, #fa-arrow-right_setas{
+.setas #fa-arrow-left_setas, #fa-arrow-right_setas
+, #fa-arrow-left_setas_categorias, #fa-arrow-right_setas_categorias{
     background-color: var(--secondary-1);
     border-radius: 50%;
     padding: .5rem;
@@ -359,11 +362,13 @@ header i:active{
     transition: all 0.3s ease-in-out;
 }
 
-.setas #fa-arrow-left_setas:hover, #fa-arrow-right_setas:hover{
+.setas #fa-arrow-left_setas:hover, #fa-arrow-right_setas:hover
+, #fa-arrow-left_setas_categorias:hover, #fa-arrow-right_setas_categorias:hover{
     background-color: var(--hover-button-1);
     color: var(--text-1);
 }
-.setas #fa-arrow-left_setas:active, #fa-arrow-right_setas:active{
+.setas #fa-arrow-left_setas:active, #fa-arrow-right_setas:active
+, #fa-arrow-left_setas_categorias:active, #fa-arrow-right_setas_categorias:active{
     transition: all 0.1s ease-in-out;
     background-color: var(--button-card);
     color: var(--hover-button-1);
@@ -380,7 +385,6 @@ header i:active{
     margin-top: 1.5rem;
     background-color: var(--secondary-1);
     padding: .5rem 1rem .5rem 1rem;
-    border-radius: 1rem;
     box-shadow:  0 5px 20px rgba(0, 0, 0, 0.171);
 }
 
@@ -431,7 +435,7 @@ header i:active{
 
 .product-card-text .price{
     .principal{
-        color: var(--hover-button-1);
+        color: var(--button-2);
         font-size: 1.2rem;
         font-weight: 700;
     }
@@ -477,6 +481,112 @@ header i:active{
     font-size: .5rem;
 }
 
+.button-product-card{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.product-card-button{
+    padding: 1rem 2rem;
+    background-color: var(--button-2);
+    color: var(--text-1);
+    font-weight: 300;
+    margin: 0 auto;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.product-card-button:hover{
+    background-color: var(--hover-button-1);
+    color: var(--primary-white);
+    
+}
+
+.product-card-button:active{
+    background-color: var(--button-card);
+    color: var(--button-2);
+    transition: all 0.1s ease-in-out;
+}
+
+/* criando a seção de categorias */
+
+.categoria-sales{
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    padding: 2rem;
+    border-bottom: 1px solid #a3a3a34d;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+}
+
+.categoria-sales-title div span{
+    color: var(--button-2);
+}
+
+.categoria-sales div span#title::before {
+    content: ' ';
+    background-color: var(--button-2);
+    width: 20px;
+    height: 30px;
+    display: inline-block; /* ESSENCIAL */
+    position: relative;
+    top: 10px;
+    margin-right: 1rem;
+    border-radius: .15rem;
+}
+
+.categoria-sales-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.categoria-sales-content h3{
+    font-size: 2rem;
+}
+
+.content-card-products{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-card-products .categorias{
+    list-style: none;
+}
+
+.categorias{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.item-categorias a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin-right: 2rem;
+    padding: 3rem;
+    border: 1px solid var(--button-card);
+    text-decoration: none;
+    color: var(--button-card);
+    transition: all 0.1S ease-in-out;
+}
+
+.item-categorias a:hover{
+    background-color: var(--button-2);
+    color: var(--background);
+    border: 1px solid var(--background);
+}
 
 
 .footer {
