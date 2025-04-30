@@ -720,3 +720,37 @@ header i:active{
 .containerMenu >div {
     margin-left: 135px;
 }
+
+.product-container {
+    display: flex;
+    background-color: blue;
+    justify-self: center;
+    width: 81.25%;
+    margin-top: 181px;
+
+}
+
+.img-thumbnail {
+    background-color: #47AB48;
+    width: 170px;
+    height: 138px;
+}
+
+.container-img-list {
+ display: flex;
+ flex-direction: column;
+ gap: 18px;
+}
+
+.product-img {
+    background-color: red;
+    width: 500px;
+    height: 800px;
+
+}
+.produt-details{
+    display: flex;
+    flex-direction: column;
+    background-color: palevioletred;
+    width: 400px;
+}

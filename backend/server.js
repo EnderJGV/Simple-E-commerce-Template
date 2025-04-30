@@ -140,6 +140,10 @@ app.post('/user/register', async (req, res) => {
     }
 })
 
+app.get('/produto', async (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/productDetails.html'));
+});
+
 app.get('/login', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
