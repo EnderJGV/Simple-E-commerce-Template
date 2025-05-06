@@ -588,6 +588,67 @@ header i:active{
     border: 1px solid var(--background);
 }
 
+.banner-day-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--button-card);
+    width: 70%;
+    margin: 1rem auto;
+}
+
+.info-bannerday{
+    padding: 2rem;
+    color: var(--primary-white);
+}
+
+.info-bannerday span#title{
+    color: var(--button-1);
+}
+
+.info-bannerday p{
+    font-size: 2.5rem;
+    font-weight: 400;
+    text-align: start;
+}
+
+.timer-bannerday{
+    display: flex;
+}
+
+.timer-bannerday .timers{
+    list-style: none;
+    margin-right: 1rem;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 4vw;
+    height: 8vh;
+    color: var(--button-card);
+    border-radius: 50%;
+}
+
+.timer-bannerday .timers .numeber-timer-bannerday{
+    margin-top: .5rem;
+    font-weight: 600;
+}
+
+.timer-bannerday .timers .title-timer-bannerday{
+    font-weight: 300;
+    font-size: .5rem;
+}
+
+.button-bannerday{
+    padding: 1rem 2rem;
+    color: var(--background);
+    background-color: var(--button-1);
+    position: relative;
+    margin-top: 5rem;
+}
+
+
 
 .footer {
     background-color: var(--button-card);
