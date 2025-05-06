@@ -105,7 +105,8 @@ app.post('/user/updateUser', async (req,res) => {
     } catch {
 
     }
-})
+});
+
 
 app.post('/user/register', async (req, res) => {
     try {
@@ -254,6 +255,10 @@ app.get('/api/getCategories', async (req,res)=> {
             message: error.message
         });
     }
+});
+
+app.get('/cart', async (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/cart.html'));
 })
 
 app.post('/api/deleteProduct', async (req, res) => {
