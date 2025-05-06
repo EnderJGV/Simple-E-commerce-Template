@@ -148,17 +148,6 @@ app.get('/user/profile', async(req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/account.html'));
 })
 
-app.get('/cart', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../frontend/public/cart.html'));
-})
-
-app.get('/about', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../frontend/public/about.html'));
-})
-
-app.get('/checkout', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, '../frontend/public/checkOut.html'));
-})
 
 
 
