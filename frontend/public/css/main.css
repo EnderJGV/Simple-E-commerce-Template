@@ -648,7 +648,33 @@ header i:active{
     margin-top: 5rem;
 }
 
-
+.login-wrap{
+    display: flex;
+    width: 90.62vW;
+    height: 50vH;
+    flex: 61.70%, auto;
+    .login-title {
+        font-size: 2rem;
+    }
+    img {
+        flex: 0 0 61.7%;
+    }
+    div {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex: 1;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+    }
+    input {
+        border-bottom: 1px solid var(--text-2);
+        background-color: transparent;
+    }
+}
 
 .footer {
     background-color: var(--button-card);
