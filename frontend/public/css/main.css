@@ -101,12 +101,18 @@ header .header_content ul li{
     list-style: none;
     margin: 0rem 1rem;
     font-weight: 300;
-    transition: 1s ease-in-out;
+    transition: .3s ease-in-out;
 }
 
 header .header_content ul li:hover{
     position: relative;
     border-bottom: 1px solid var(--primary-black);
+    font-weight: 500;
+}
+
+header .header_content ul li:active{
+    color: var(--hover-button-1);
+    transition: 30ms ease-in-out;
 }
 
 /* Logo - Name*/
@@ -157,7 +163,22 @@ header .search_store_itens .search{
 }
 
 header .store_itens .fa-solid.fa-user{
+    margin-left: .2rem;
+}
+header .store_itens i{
+    font-size: 1.1rem;
+}
+
+header .store_itens span{
     margin-left: 1rem;
+    font-weight: 300;
+}
+header .store_itens span:hover{
+    color: var(--hover-button-1);
+}
+header .store_itens span:active{
+    color: var(--button-2);
+    
 }
 
 header i{
@@ -205,6 +226,11 @@ header i:active{
 .itens-menu-title:hover{
     color: var(--primary-black);
     font-weight: 500;
+}
+
+.itens-menu-title:active{
+    color: var(--hover-button-1);
+    transition: 30ms ease-in-out;
 }
 
 .menu-content-ul{
@@ -297,10 +323,11 @@ header i:active{
 
 /* Section de flash sales */
 .flash-sales{
-    margin-top: 1rem;
     padding: 2rem;
     border-bottom: 1px;
     border-bottom: 1px solid #a3a3a34d;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .flash-sales-title div span{
@@ -375,17 +402,22 @@ header i:active{
 }
 
 .content-card-products{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: auto;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .product-card{
-    width: 15%;
+    width: 20%;
     padding: 2rem;
-    margin-right: 2rem;
-    margin-top: 1.5rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
     background-color: var(--secondary-1);
     padding: .5rem 1rem .5rem 1rem;
     box-shadow:  0 5px 20px rgba(0, 0, 0, 0.171);
+    box-sizing: border-box;
 }
 
 .descont-product {
@@ -523,6 +555,8 @@ header i:active{
     margin-bottom: 1rem;
 }
 
+
+
 .categoria-sales-title div span{
     color: var(--button-2);
 }
@@ -649,6 +683,104 @@ header i:active{
 }
 
 
+/* New Arrial */
+
+.parent-featuared {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 8px;
+    margin-top: 2rem;
+}
+    
+.product-featuared_1 {
+    grid-column: span 2 / span 2;
+    grid-row: span 6 / span 6;
+    background-color: var(--button-card);
+}
+
+.product-featuared_1 .img_featuared{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.img_featuared{
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.img_featuared img{
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+}
+
+.text_featuared{
+    position: absolute;
+    top: 238rem;
+    margin-left: 2rem;
+    color: var(--primary-white);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+}
+.text_featuared_2{
+    position: absolute;
+    top: 215rem;
+    margin-left: 2rem;
+    color: var(--primary-white);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+}
+
+.title_featuared{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.desc_featuared{
+    font-size: .7rem;
+    font-weight: 300;
+    margin: .5rem 0;
+    width: 70%;
+}
+
+a.button_featuared{
+    border-bottom: 1px solid var(--background);
+    text-decoration: none;
+    color: var(--background);
+    width: max-content;
+}
+
+.product-featuared_2 {
+    grid-column: span 2 / span 2;
+    grid-row: span 3 / span 3;
+    grid-column-start: 3;
+    background-color: var(--button-card);
+}
+
+.product-featuared_3 {
+    grid-row: span 3 / span 3;
+    grid-column-start: 3;
+    grid-row-start: 4;
+    background-color: var(--button-card);
+}
+
+.product-featuared_4 {
+    grid-row: span 3 / span 3;
+    grid-column-start: 4;
+    grid-row-start: 4;
+    background-color: var(--button-card);
+}
+
+
 
 .footer {
     background-color: var(--button-card);
@@ -677,6 +809,15 @@ header i:active{
     .text-emphasis{
         font-size: 20px;
         font-weight: bold;
+    }
+    span{
+        margin: .5rem 0;
+        font-size: .9rem;
+        font-weight: 300;
+    }
+
+    span:hover{
+        color: var(--button-2);
     }
 
     .email-input{
