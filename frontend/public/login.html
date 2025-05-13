@@ -42,13 +42,13 @@
         <div class="login-wrap">
             <img></img>
             <div>
-                <form>
+                <form id="login-form">
                     <span class="login-title">Login no e-commerce</span>
                     <span>Insira suas informações abaixo</span>
-                    <input class="email-input" type="text" placeholder="email"/>
-                    <input type="text" placeholder="senha"/>
+                    <input name="email" class="email-input" type="text" placeholder="email"/>
+                    <input name="senha" type="text" placeholder="senha"/>
                     <div class="container-buttons">
-                        <button class="button-red">Log In</button>
+                        <button class="button-red" onclick="printForm(event)">Log In</button>
                         <button class="button-flat">
                            Esqueceu a senha? 
                         </button>
@@ -97,6 +97,8 @@
             </div>
         </div>
     </div>
+    <script src="./js/Notifications.js"></script>
     <script src="./js/main.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 </html>

@@ -95,6 +95,7 @@ header .header_content ul{
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 header .header_content ul li{
@@ -947,4 +948,66 @@ a.button_featuared{
 
 .containerMenu >div {
     margin-left: 135px;
+}
+
+.notifications {
+    width: 300px;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 100%;
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.notificationBox {
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 0px 4px 3px #0000001a;
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+    pointer-events: auto;
+}
+
+.notification-btn-close {
+    border: none;
+    background-color: none;
+    color: #ffffff98;
+    border-radius: 40%;
+    font-weight: 800;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.notification-title {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-sizing: border-box;
+    height: 30px;
+    color: #0000009c;
+    font-weight: 500;
+    border-top: 1px solid #ffffff36;
+    border-left: 1px solid #ffffff36;
+    border-right: 1px solid #ffffff36;
+    border-bottom: 1px solid #0000001f;
+}
+.notification-message {
+    height: 100%;
+    padding: 0px 10px;
+    background-color: #f4f4f4;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #00000091;
+    border: 1px solid white;
 }
