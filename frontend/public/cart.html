@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My e-commerce</title>
+    <!-- ICON SITE -->
+    <link rel="shortcut icon" href="img/10919715.png" type="image/x-icon">
+    <!-- CSS MAIN -->
+    <link rel="stylesheet" href="main.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="text_desconto">
+            <p>Desconto de 10% para compras <span>acima de R$ 100</span></p>
+        </div>
+        <div class="header_content">
+            <span>Exclusive</span>
+            <ul>
+                <li>Home</li>
+                <li>Contact</li>
+                <li>About</li>
+                <li>Sign Up</li>
+            </ul>
+            <div class="search_store_itens">
+                <div class="search">
+                    <input type="text" name="" id="" placeholder="O que você esta procurando?" />
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="store_itens">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Log In</span>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container" id="carrinho">
+        <div class="item" data-price="10">
+
+            <img src="https://via.placeholder.com/80" alt="Produto">
+
+            <div class="item-info">
+                <h3>Fone de Ouvido Bluetooth</h3>
+                <div class="controls">
+                    <button onclick="changeQtd(this, -1)">-</button>
+                    <span class="qtd">1</span>
+                    <button onclick="changeQtd(this, 1)">+</button>
+                </div>
+                <div class="subtotal">Subtotal: R$ <span class="subtotal-value">10,00</span></div>
+            </div>
+            <button class="remove-btn" onclick="removeItem(this)">Remover</button>
+        </div>
+        <div class="item" data-price="89.50">
+            <img src="https://via.placeholder.com/80" alt="Produto">
+            <div class="item-info">
+                <h3>Mouse Gamer RGB</h3>
+                <div class="controls">
+                    <button onclick="changeQtd(this, -1)">-</button>
+                    <span class="qtd">1</span>
+                    <button onclick="changeQtd(this, 1)">+</button>
+                </div>
+                <div class="subtotal">Subtotal: R$ <span class="subtotal-value">89,50</span></div>
+            </div>
+            <button class="remove-btn" onclick="removeItem(this)">Remover</button>
+        </div>
+
+        <div class="resumo">
+            <p>Subtotal: R$ <span id="subtotal">289,40</span></p>
+            <p>Frete: R$ <span id="frete">20,00</span></p>
+            <p class="total">Total: R$ <span id="total">309,40</span></p>
+        </div>
+    </div>
+    </div>
+
+    <section class="explore-products">
+        <section class="categoria-sales">
+            <div class="button-product-card">
+                <button type="button" class="product-card-button">View all Products</button>
+            </div>
+        </section>
+    </section>
+
+    <div class="footer">
+        <div class="footer-content">
+            <div>
+                <span class="text-emphasis" style="font-size: 24px;">Exclusive</span>
+                <span>Subscribe</span>
+                <span>Get 10% off your first order</span>
+                <div class="email-input">
+                    <input type="text" placeholder="Enter Your email">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </div>
+            </div>
+            <div>
+                <span class="text-emphasis">Support</span>
+                <span>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</span>
+                <span>exclusive@gmail.com</span>
+                <span>+88015-88888-9999</span>
+            </div>
+            <div>
+                <span class="text-emphasis">Account</span>
+                <span>My Account</span>
+                <span>Login / Register</span>
+                <span>Cart</span>
+                <span>Wish List</span>
+                <span>Shop</span>
+            </div>
+            <div>
+                <span class="text-emphasis">Quick Links</span>
+                <span>Privacity Policy</span>
+                <span>Terms of Use</span>
+                <span>FAQ</span>
+                <span>Contact</span>
+            </div>
+            <div>
+                <span class="text-emphasis">Download App</span>
+                <div>app informacoes</div>
+                <div>social media buttons</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="main.js"></script>
+</html>
