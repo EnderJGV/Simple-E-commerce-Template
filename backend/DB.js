@@ -57,7 +57,7 @@ class DB {
     try {
         // @TODO userAddress
         const result = await this.connection.query(
-            'INSERT INTO usuario (nome, sobrenome, senha, email) VALUES (?, ?, ?)',
+            'INSERT INTO usuario (nome, sobrenome, senha, email) VALUES (?, ?, ?, ?)',
             [userName, userlastName, userPassword, userEmail]
         )
         return result;
