@@ -77,7 +77,11 @@ header .header_content{
     align-items: center;
     background-color: var(--background);
     padding: 2rem;
-    height: 13vh;
+    height: 13vh;    
+    a {
+        text-decoration: none;
+        color: var(--primary-black);
+    }
 }
 
 header .header_content.sticky{
