@@ -950,11 +950,9 @@ a.button_featuared{
     width: 300px;
 }
 
-.containerMenu >div {
+.containerMenu > div {
     margin-left: 135px;
 }
-
-<<<<<<< HEAD
 .notifications {
     width: 300px;
     box-sizing: border-box;
@@ -1007,6 +1005,7 @@ a.button_featuared{
     border-right: 1px solid #ffffff36;
     border-bottom: 1px solid #0000001f;
 }
+
 .notification-message {
     height: 100%;
     padding: 0px 10px;
@@ -1016,7 +1015,7 @@ a.button_featuared{
     color: #00000091;
     border: 1px solid white;
 }
-=======
+
 .product-container {
     display: flex;
     justify-self: center;
@@ -1127,4 +1126,3 @@ input[type=number] {
  background-color: transparent;
  border-radius: 4px;
 } 
->>>>>>> 8bb64215d76a56772af7ed5d93cbe0b5b4b07326
