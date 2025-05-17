@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded',() => {
         signUpLink.textContent = 'Meu Perfil';
         signUpLink.setAttribute('href', '/user/profile');
     }
+    renderProducts();
 })
 
 function toggleMenu(){
@@ -62,6 +63,79 @@ function updateCountdown() {
             span.textContent = timeValues[index];
         });
     });
+}
+
+function getProducts() {
+    return new Promise((resolve, reject) => {
+        const httpRequest = new XMLHttpRequest();
+        httpRequest.open('GET','/api/products');
+        httpRequest.send();
+        httpRequest.onload = () => {
+            const response = JSON.parse(httpRequest.response);
+            if (response.error) {
+                console.error(response.message);
+                reject(null);
+            } else {
+                resolve(response.data.map((product) =>{
+                    return {
+                        name: product.nome,
+                        description: product.descricao,
+                        image: product.imagens ? product.imagens.split(';')[0] : null,
+                        price: product.preco,
+                        category: product.categoria
+                    }
+                }));
+            }
+        }
+    })
+}
+
+async function renderProducts() {
+    const container = document.getElementById('content-card-products');
+    const products = await getProducts();
+    console.log(products);
+    if (products) {
+        products.forEach(product => {
+            container.appendChild(productCardComponent(product));
+        })
+    }
+}
+
+function productCardComponent({ 
+    name, description, image, price, classification, originalPrice, discount
+}) {
+
+const wrapper = document.createElement('div');
+wrapper.classList.add('product-card');
+const element = `
+    <div>
+        <div class="descont-product">
+            <span>-{discount}%</span>
+            <i class="fa-solid fa-heart" id="fa-heart"></i>
+            <i class="fa-solid fa-eye" id="fa-eye"></i>
+        </div>
+        <div class="product-card-img">
+            <img src=${image ? image : './img/no-image.png'} alt="produto">
+        </div>
+        <button class="button-card">Add To Cart</button>
+    </div>
+    <div class="product-card-text">
+        <p>${name}</p>
+        <div class="price">
+            <span class="principal">R$ ${price}</span>
+            <span class="secundario">R$ {originalPrice}</span>
+        </div>
+        <div class="stars">
+            <p>
+                <span>★★★★★</span> (+100)
+            </p>
+        </div>
+    </div>
+  `;
+
+  wrapper.innerHTML = element;
+
+  return wrapper;
 }
 
 // Atualiza a cada segundo
