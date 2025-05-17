@@ -80,6 +80,9 @@ app.post('/login', async (req, res) => {
 
         return res.json({
             auth: true,
+            name: nome,
+            email: email,
+            permissions: null,
             token,
         })
 
@@ -91,7 +94,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/user/updateUser', async (req,res) => {
+app.post('/user/updateUser', verifyToken ,async (req,res) => {
     try {
         const {userName, userLastName, userEmail, userAdress, userPassword, userNewPassWord} = req.body || {};
         const  payload = {
