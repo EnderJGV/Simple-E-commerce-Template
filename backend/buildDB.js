@@ -16,8 +16,8 @@ async function buildDb() {
     });
 
     try {
-        console.log("Buscando script de criação da base de dados em ./sql/eccomerce.sql\n\n");
-        const sql = fs.readFileSync(path.join(__dirname, './sql/eccomerce.sql'),'utf-8');
+        console.log("Buscando script de criação da base de dados em ./sql/Ecommerce.sql\n\n");
+        const sql = fs.readFileSync(path.join(__dirname, './sql/Ecommerce.sql'),'utf-8');
         console.log("Criando ou atualizando base de dados Ecommerce \n\n");
         await connection.query(sql);
         console.log('\x1b[32mBanco de dados ecommerce criado/atualizado com sucesso!\x1b[0m\n\n');
