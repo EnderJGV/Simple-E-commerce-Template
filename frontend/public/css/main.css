@@ -98,10 +98,14 @@ header .header_content ul{
 
 }
 
+header .header_content ul li a{
+    text-decoration: none;
+    color: var(--primary-black);
+}
+
 header .header_content ul li{
     list-style: none;
     margin: 0rem 1rem;
-    font-weight: 300;
     transition: .3s ease-in-out;
 }
 
@@ -117,8 +121,10 @@ header .header_content ul li:active{
 }
 
 /* Logo - Name*/
-header .header_content span{
+header .header_content span a{
     font-weight: 600;
+    text-decoration: none;
+    color: var(--primary-black);
 }
 
 header .search{
@@ -166,13 +172,22 @@ header .search_store_itens .search{
 header .store_itens .fa-solid.fa-user{
     margin-left: .2rem;
 }
-header .store_itens i{
+
+header .store_itens a{
+    text-decoration: none;
+}
+
+
+
+header .store_itens a i{
     font-size: 1.1rem;
+    color: var(--primary-black);
 }
 
 header .store_itens span{
     margin-left: 1rem;
     font-weight: 300;
+    color: var(--primary-black);
 }
 header .store_itens span:hover{
     color: var(--hover-button-1);
