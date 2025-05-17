@@ -13,8 +13,19 @@ function printForm(e) {
     }));
     http.onload = async () => {
         const response = JSON.parse(http.response);
-        if(!response.error && response.status === 200) {
-            await sessionStorage.setItem('user', http.response);
+        if(!response.error) {
+            try {
+                sessionStorage.removeItem('user');
+                sessionStorage.setItem('user', JSON.stringify({
+                    name: response.name,
+                    email: response.email,
+                    permissions: null,
+                    token: response.token
+                }));
+                window.location.replace('/');
+            } catch(e) {
+                notification.addNotification('Erro', e.message, { color: 'error' });
+            }
         } else {
             notification.addNotification('Erro', response.message, { color: 'error' });
         }

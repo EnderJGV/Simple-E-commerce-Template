@@ -5,6 +5,18 @@ window.addEventListener('scroll',function(){
     header_desconto.classList.toggle('sticky', window.scrollY) > 0;
 });
 
+window.addEventListener('DOMContentLoaded',() => {
+    const user = JSON.parse(sessionStorage.getItem('user') || null);
+    if(user) {
+        const loginLink = document.querySelector('a[href="/login"]');
+        const signUpLink = document.querySelector('a[href="/singUp.html"]');
+        loginLink.querySelector('span').textContent = user.name;
+        loginLink.setAttribute('href', '/user/profile');
+        signUpLink.textContent = 'Eu';
+        signUpLink.setAttribute('href', '/user/profile');
+    }
+})
+
 function toggleMenu(){
     menuToggle.classList.toggle('active');
     navigation.classList.toggle('active');
