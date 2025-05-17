@@ -53,6 +53,40 @@ class DB {
     }
   }
 
+  getProductsByCategory = async (categoryId) => {
+    try {
+        const [ results ] = await this.connection.query(
+            `
+            SELECT 
+                p.cd_produto AS cdProduto,
+                p.nome AS nome,
+                c.nome AS categoria,
+                p.preco As preco,
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
+            FROM 
+                produto p
+            LEFT JOIN 
+                categoria c
+            ON
+                p.cd_categoria = c.cd_categoria
+            LEFT JOIN
+                imagens i
+            ON 
+                p.cd_produto = i.cd_produto
+            WHERE
+                p.cd_categoria = ?
+            GROUP BY
+                p.cd_produto, p.nome, c.nome;
+            `,
+            [categoryId]
+        );
+
+        return results;
+    } catch(error) {
+        throw error;
+    }
+  }
+
   insertUser = async (userName, userlastName, userPassword, userEmail, userAddress = '') => {
     try {
         // @TODO userAddress

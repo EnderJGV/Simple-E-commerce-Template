@@ -261,6 +261,23 @@ app.get('/api/products', async (req,res) => {
     }
 })
 
+app.get('/api/products/:categoryId', async (req,res) => {
+    try {
+        const { categoryId } = req.params;
+        const data = await DB.getProductsByCategory(categoryId);
+        res.json({
+            error: false,
+            data: data
+        })
+
+    }catch(error){
+        res.json({
+            error: true,
+            message: error.message
+        })
+    }
+})
+
 app.get('/api/getCategories', async (req,res)=> {
     try {
         const result = await DB.getCategories();

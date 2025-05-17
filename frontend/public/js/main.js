@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded',() => {
         const signUpLink = document.querySelector('a[href="/singUp.html"]');
         loginLink.querySelector('span').textContent = user.name;
         loginLink.setAttribute('href', '/user/profile');
-        signUpLink.textContent = 'Eu';
+        signUpLink.textContent = 'Meu Perfil';
         signUpLink.setAttribute('href', '/user/profile');
     }
 })
