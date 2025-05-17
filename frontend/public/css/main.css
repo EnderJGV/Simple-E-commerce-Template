@@ -1026,3 +1026,74 @@ a.button_featuared{
     color: #00000091;
     border: 1px solid white;
 }
+
+/* about */
+
+main .url_site{
+    position: relative;
+    left: 5rem;
+    top: 2rem;
+    color: var(--text-2);
+}
+
+main .url_site span{
+    font-weight: 500;
+    color: var(--primary-black);
+}
+
+.our_story{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.our_story .out_story_text{
+    display: flex;
+    flex-direction: column;
+}
+
+.our_story .our_story_title{
+    font-weight: 700;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.our_story_sub_title{
+    margin-bottom: 1rem;
+    width: 90%;
+    text-align: justify;
+}
+
+.our_story_img div img{
+    transform: scale(.8);
+}
+
+.cards{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.cards .card{
+    border: 2px solid var(--button-card);
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cards .card i{
+    background-color: var(--button-card);
+    padding: 1rem;
+    border-radius: 50%;
+    color: var(--primary-white);
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    box-shadow: 0px 0px 1px 10px var(--text-2);
+}
