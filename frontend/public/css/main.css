@@ -741,8 +741,8 @@ header i:active{
 
 .text_featuared{
     position: absolute;
-    top: 238rem;
-    margin-left: 2rem;
+    top: 248rem;
+    margin-left: 3rem;
     color: var(--primary-white);
     z-index: 20;
     display: flex;
@@ -750,7 +750,7 @@ header i:active{
 }
 .text_featuared_2{
     position: absolute;
-    top: 215rem;
+    top: 225rem;
     margin-left: 2rem;
     color: var(--primary-white);
     z-index: 20;
