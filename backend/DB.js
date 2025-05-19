@@ -23,6 +23,21 @@ class DB {
             
     }
 
+ updateUser = async ({nome, email, senha}) => {
+    try {
+        const [ result ] = await this.connection.query(
+            `
+                UPDATE usuario SET nome = ?, senha = ?, email = ?
+                 WHERE email = ?;
+            `,[nome, senha, email, email]
+        );
+        console.log(result)
+        return result;
+    } catch (error) {
+        throw error;
+    }
+ }
+
   getProducts = async () => {
     try {
         const [ results ] = await this.connection.query(
