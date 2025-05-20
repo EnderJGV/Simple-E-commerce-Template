@@ -1268,3 +1268,80 @@ main .url_site span{
     color: var(--primary-black);
     font-size: 1.2rem;
 }
+
+.contact{
+    margin-top: 1rem;
+}
+
+.contact .container_contact{
+    margin: 4rem auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
+    background-color: var(--background);
+    box-shadow:  0 5px 20px rgba(0,0,0,0.05);
+    padding: 1rem;
+}
+
+.contact .container_contact .contact_card{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.contact .container_contact .contact_card div{
+    i{
+        background-color: var(--button-2);
+        border-radius: 50%;
+        padding: .8rem;
+        color: var(--background);
+    }
+
+    span{
+        font-weight: 700;
+    }
+
+    p{
+        font-size: .8rem;
+        margin-top: 1rem;
+    }
+}
+
+.contact_form{
+    
+}
+
+.contact .contact_form{
+    display: flex;
+    flex-direction: column;
+}
+
+.contact .contact_inputs_firts{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.contact .contact_inputs_firts input, textarea{
+    padding: 1rem;
+    border: 1px solid var(--text-2);
+    background-color: rgb(244, 244, 244);
+    border-radius: 4px;
+    outline: none;
+}
+
+.contact textarea{
+    margin-top: 1rem;
+}
+
+.contact .contact_inputs_firts input::placeholder{
+    color: var(--text-2);
+}
+
+.contact_btn{
+    border-radius: 4px;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
