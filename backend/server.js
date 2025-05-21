@@ -232,6 +232,22 @@ app.post('/api/createCategory', async (req,res) => {
     }
 });
 
+app.get(`/api/product/:id`, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await DB.getProductById(id);
+        res.json({
+            error: false,
+            data: product
+        });
+    } catch (error) {
+        res.json({
+            error: true,
+            data: error.message
+        });
+    }
+})
+
 app.post('/api/createProduct', async (req, res) => {
     try {
         const product = req.body || {};

@@ -91,14 +91,28 @@ function getProducts() {
 }
 
 async function renderProducts() {
-    const container = document.getElementById('content-card-products');
-    const products = await getProducts();
-    console.log(products);
-    if (products) {
-        products.forEach(product => {
-            container.appendChild(productCardComponent(product));
-        })
+    try {
+        const container = document.getElementById('content-card-products');
+        const products = await getProducts();
+
+        if (products && products.length > 0) {
+            products.forEach(product => {
+                container.appendChild(productCardComponent(product));
+            })
+        } else {
+            container.innerHTML =
+                "<div class='no-results-text'><span> Nenhum produto encontrado </span></div>";
+        }
+    } catch (error) {
+        const container = document.getElementById('content-card-products');
+        container.innerHTML =
+            `<div class='no-results-text'>
+                <span>
+                    Erro ao tentar carregar produtos.
+                </span>
+            </div>`;
     }
+    
 }
 
 function productCardComponent({ 
