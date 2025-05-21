@@ -18,6 +18,7 @@
 --
 -- Table structure for table `Categoria`
 --
+USE ecommerce;
 
 DROP TABLE IF EXISTS `Categoria`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
