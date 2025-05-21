@@ -53,14 +53,14 @@
         </div>
 
         <div class="containerForm">
-            <form>
+            <form id="form">
 
                 <span style="grid-column:1 /span 2">Edite seu perfil</span>
 
 
                 <div style="grid-column: 1 /span 2" class="container-input">
                     <label for="firstName">Primeiro nome</label>
-                    <input name="firstName" type="text">
+                    <input name="firstName" type="text" id="firstName">
                 </div>
 
 
@@ -71,7 +71,7 @@
 
                 <div style="grid-column: 1 /span 2" class="container-input">
                     <label for="email">Email</label>
-                    <input name="email" type="text" placeholder="exemplo@gmail.com">
+                    <input name="email" type="text" placeholder="exemplo@gmail.com" id="email">
                 </div>
 
                 <div style="grid-column: 3 /span 2" class="container-input">
@@ -98,7 +98,7 @@
                 <button class="button-flat">
                     Cancelar
                 </button>
-                <button class="button-red">
+                <button class="button-red" id="btnSave">
                     Salvar Alterações
                 </button>
 
@@ -112,4 +112,36 @@
 
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+        const userdata=sessionStorage.getItem("user");
+        console.log(userdata);
+        if(userdata){
+            const {name, email} =JSON.parse(userdata)
+            document.getElementById("firstName").value=name;
+            document.getElementById("email").value=email;
+        }
+    })
+
+    function sendData(data){
+        const http= new XMLHttpRequest();
+        http.open("POST","/user/updateUser");
+        http.setRequestHeader("Content-Type", "application/json");
+        http.send(JSON.stringify(data));
+        http.onload =()=>{
+            alert(http.response);
+        }
+    }
+
+    document.getElementById("btnSave").addEventListener("click", ()=>{
+        const formElement=document.getElementById("form");
+        const formData= new FormData(formElement);
+        console.log(formData);
+        const data= Object.fromEntries(formData.entries());
+        console.log(data);
+        sendData(data);
+    
+    })
+
+</script>
 </html>

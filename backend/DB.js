@@ -23,6 +23,21 @@ class DB {
             
     }
 
+ updateUser = async ({nome, email, senha}) => {
+    try {
+        const [ result ] = await this.connection.query(
+            `
+                UPDATE usuario SET nome = ?, senha = ?, email = ?
+                 WHERE email = ?;
+            `,[nome, senha, email, email]
+        );
+        console.log(result)
+        return result;
+    } catch (error) {
+        throw error;
+    }
+ }
+
   getProducts = async () => {
     try {
         const [ results ] = await this.connection.query(
@@ -133,6 +148,35 @@ class DB {
          };
     } catch(error) {
         throw new Error('Houve um erro ao inserir produto' + error);
+    }
+  }
+
+  getProduct = async (cdProduto) => {
+    try {
+        const [result] = await this.connection.query(`
+            SELECT 
+                p.cd_produto AS cdProduto,
+                p.nome AS nome,
+                c.nome AS categoria,
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
+            FROM 
+                produto p
+            LEFT JOIN 
+                categoria c
+            ON
+                p.cd_categoria = c.cd_categoria
+            LEFT JOIN
+                imagens i
+            ON 
+                p.cd_produto = i.cd_produto
+            WHERE
+                cd_produto = ?
+            GROUP BY
+                p.cd_produto, p.nome, c.nome;
+            `,[cdProduto]);
+        return result;
+    } catch(error) {
+        throw error;
     }
   }
 

@@ -71,12 +71,16 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/user/account', (req, res) => {
+    res.sendFile(path.join(__dirname, 'account.html'));
+});
+
 app.post('/login', async (req, res) => {
     try {
         const { userEmail, userPassword } = req.body || {};
         const user = await DB.userLogin(userEmail, userPassword);
         const { id_usuario, email, nome } = user;
-        const token = jwt.sign({user:{id_usuario, email, nome}}, SECRET, { expiresIn: 1800});
+        const token = jwt.sign({user:{id_usuario, email, nome}}, SECRET, { expiresIn: 10000000});
 
         return res.json({
             auth: true,
@@ -94,19 +98,30 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.post('/user/updateUser', verifyToken ,async (req,res) => {
+app.post('/user/updateUser', async (req,res) => {
     try {
-        const {userName, userLastName, userEmail, userAdress, userPassword, userNewPassWord} = req.body || {};
+        const {firstName, lastName, email, adress, currentPassword, newPassword} = req.body || {};
         const  payload = {
-            nome: userName,
-            sobrenome: userLastName,
-            email: userEmail,
-            endereco: userAdress,
-            senha: userNewPassWord,
+            nome: firstName,
+            sobrenome: lastName,
+            email: email,
+            endereco: adress,
+            oldPassword: currentPassword,
+            senha: newPassword,
         }
-        const response = await DB.updateUser()
-    } catch {
+        console.log(payload);
 
+        const response = await DB.updateUser(payload)
+
+        res.send({
+            error: false,
+            message: 'OK'
+        })
+    } catch(error) {
+        res.send({
+            error: true, 
+            message: 'Houve um erro ao tentar atualizar as informações do usuário. '+ error,
+        })
     }
 })
 
@@ -141,6 +156,10 @@ app.post('/user/register', async (req, res) => {
             message: error.message
         });
     }
+})
+
+app.get('/account', (req,res) => {
+    res.sendFile(path.join(__dirname, 'account.html'));
 })
 
 app.get('/produto', async (req, res) => {
@@ -212,6 +231,22 @@ app.post('/api/createCategory', async (req,res) => {
         });
     }
 });
+
+app.get(`/api/product/:id`, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await DB.getProductById(id);
+        res.json({
+            error: false,
+            data: product
+        });
+    } catch (error) {
+        res.json({
+            error: true,
+            data: error.message
+        });
+    }
+})
 
 app.post('/api/createProduct', async (req, res) => {
     try {
