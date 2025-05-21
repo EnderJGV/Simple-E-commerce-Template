@@ -42,32 +42,25 @@
         </div>
     </header>
     <div class="container">
-        <div class="singup-container">
-            <div class="singup-img">
-            </div>
-            <div class="singup-formulario">
-                <div class="singup-form-header">
-                    <span class="titulo">
-                        Criar uma conta
-                    </span>
-                    <span class="descricao">
-                        Insira suas informações abaixo
-                    </span>
-
-
-                </div>
-                <form class="singup-form">
-                    <input type="text" placeholder="Nome">
-                    <input type="text" placeholder="Email">
-                    <input type="text" placeholder="Senha">
-                    <button>
-                        Crie a contaaaaaaaaaa
-                    </button>
+        <div class="singUp-wrap">
+            <img src="./img/login-img.png"></img>
+            <div>
+                <form id="login-form">
+                    <span class="login-title">Criar uma conta</span>
+                    <span>Insira suas informações abaixo</span>
+                    <input name="nome" class="input" type="text" placeholder="nome"/>
+                    <input name="email" class="input" type="text" placeholder="email"/>
+                    <input name="senha" type="text" placeholder="senha"/>
+                    <div class="container-buttons">
+                        <button class="button-red" onclick="printForm(event)">Log In</button>
+                        <button class="button-flat">
+                           Esqueceu a senha? 
+                        </button>
+                    </div>
                 </form>
-
             </div>
-            
         </div>
+
     </div>
     <div class="footer">
         <div class="footer-content">
@@ -107,5 +100,9 @@
                 <div>social media buttons</div>
             </div>
         </div>
+    </div>
+    <script src="./js/Notifications.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/login.js"></script>
 </body>
 </html>
