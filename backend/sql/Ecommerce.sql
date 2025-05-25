@@ -1,127 +1,265 @@
--- MySQL dump 10.13  Distrib 9.2.0, for macos15 (arm64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: Ecommerce
--- ------------------------------------------------------
--- Server version	9.2.0
+-- Host: 127.0.0.1
+-- Tempo de geração: 25/05/2025 às 15:25
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
+
+USE eccomerce;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `Categoria`
+-- Banco de dados: `eccomerce`
 --
 USE ecommerce;
 
-DROP TABLE IF EXISTS `Categoria`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Categoria` (
-  `cd_categoria` int NOT NULL AUTO_INCREMENT,
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `cd_categoria` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
   `estado` enum('ativo','pausado') DEFAULT 'ativo',
-  `imagem` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`cd_categoria`),
-  UNIQUE KEY `cd_categoria` (`cd_categoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `imagem` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Table structure for table `imagens`
+-- Despejando dados para a tabela `categoria`
 --
 
-DROP TABLE IF EXISTS `imagens`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+INSERT INTO `categoria` (`cd_categoria`, `nome`, `estado`, `imagem`) VALUES
+(1, 'Eletrônicos', 'ativo', 'fa-solid fa-microchip'),
+(2, 'Vestuário', 'ativo', 'fa-solid fa-shirt'),
+(3, 'Eletrodomésticos', 'ativo', 'fa-solid fa-blender'),
+(4, 'Livros', 'ativo', 'fa-solid fa-book'),
+(5, 'Móveis', 'ativo', 'fa-solid fa-chair');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `imagens`
+--
+
 CREATE TABLE `imagens` (
-  `cd_imagem` int NOT NULL AUTO_INCREMENT,
+  `cd_imagem` int(11) NOT NULL,
   `nome` varchar(25) DEFAULT NULL,
-  `caminho` varchar(30) DEFAULT NULL,
-  `cd_produto` int DEFAULT NULL,
-  PRIMARY KEY (`cd_imagem`),
-  KEY `fk_cd_produto` (`cd_produto`),
-  CONSTRAINT `fk_cd_produto` FOREIGN KEY (`cd_produto`) REFERENCES `produto` (`cd_produto`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `caminho` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Table structure for table `Permissoes`
+-- Despejando dados para a tabela `imagens`
 --
 
-DROP TABLE IF EXISTS `Permissoes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Permissoes` (
-  `id_permissao` int NOT NULL AUTO_INCREMENT,
+INSERT INTO `imagens` (`cd_imagem`, `nome`, `caminho`) VALUES
+(1, '1745196845103.jpeg', '/uploads/1745196845103.jpeg'),
+(2, '1745196950438.jpeg', '/uploads/1745196950438.jpeg'),
+(3, '1745197131527.jpeg', '/uploads/1745197131527.jpeg'),
+(4, 'Smartphone Galaxy A14', 'https://images.samsung.com/is/'),
+(5, 'Notebook Dell Inspiron', 'https://m.media-amazon.com/ima'),
+(6, 'Camisa Polo Azul', 'https://img.freepik.com/fotos-'),
+(7, 'Tênis Nike Revolution 7', 'https://static.nike.com/a/imag'),
+(8, 'Mouse Gamer Redragon Cobr', 'https://m.media-amazon.com/ima'),
+(9, 'Fone Bluetooth JBL Tune 5', 'https://m.media-amazon.com/ima'),
+(10, 'Liquidificador Arno Power', 'https://m.media-amazon.com/ima'),
+(11, 'Cafeteira Nespresso Vertu', 'https://m.media-amazon.com/ima'),
+(12, 'Livro - O Alquimista', 'https://m.media-amazon.com/ima'),
+(13, 'Cadeira Gamer ThunderX3 C', 'https://m.media-amazon.com/ima');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `permissoes`
+--
+
+CREATE TABLE `permissoes` (
+  `id_permissao` int(11) NOT NULL,
   `nome` varchar(20) NOT NULL,
   `criar_produto` enum('S','N') DEFAULT 'N',
   `excluir_produto` enum('S','N') DEFAULT 'N',
   `criar_categoria` enum('S','N') DEFAULT 'N',
   `excluir_categoria` enum('S','N') DEFAULT 'N',
-  `criar_promocoes` enum('S','N') DEFAULT 'N',
-  PRIMARY KEY (`id_permissao`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `criar_promocoes` enum('S','N') DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Table structure for table `PRODUTO`
+-- Despejando dados para a tabela `permissoes`
 --
 
-DROP TABLE IF EXISTS `PRODUTO`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `PRODUTO` (
-  `cd_produto` int NOT NULL AUTO_INCREMENT,
+INSERT INTO `permissoes` (`id_permissao`, `nome`, `criar_produto`, `excluir_produto`, `criar_categoria`, `excluir_categoria`, `criar_promocoes`) VALUES
+(1, 'usuário', 'N', 'N', 'N', 'N', 'N'),
+(2, 'Admin', 'S', 'S', 'S', 'S', 'S'),
+(3, 'Editor', 'S', '', 'S', '', 'S'),
+(4, 'Cliente', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `produto`
+--
+
+CREATE TABLE `produto` (
+  `cd_produto` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   `preco` float DEFAULT NULL,
-  `cd_categoria` int DEFAULT NULL,
-  `cd_imagem` int DEFAULT NULL,
-  `quantidade` int DEFAULT '0',
-  PRIMARY KEY (`cd_produto`),
-  UNIQUE KEY `cd_produto` (`cd_produto`),
-  KEY `cd_categoria` (`cd_categoria`),
-  KEY `fk_produto_imagem` (`cd_imagem`),
-  CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`cd_categoria`) REFERENCES `Categoria` (`cd_categoria`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `cd_categoria` int(11) DEFAULT NULL,
+  `cd_imagem` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Table structure for table `usuario`
+-- Despejando dados para a tabela `produto`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+INSERT INTO `produto` (`cd_produto`, `nome`, `descricao`, `preco`, `cd_categoria`, `cd_imagem`) VALUES
+(15, 'Smartphone Galaxy A14', 'Smartphone Samsung 64GB, Android 13', 1299.99, NULL, 4),
+(16, 'Notebook Dell Inspiron', 'Notebook com Intel Core i5, 8GB RAM e SSD 256GB', 3599, NULL, 5),
+(17, 'Camisa Polo Azul', 'Camisa polo de algodão azul marinho tamanho M', 89.9, NULL, 6),
+(18, 'Tênis Nike Revolution 7', 'Tênis esportivo masculino Nike, preto', 249.5, NULL, 7),
+(19, 'Mouse Gamer Redragon Cobra M711', 'Mouse com sensor de alta precisão e RGB', 129.9, NULL, 8),
+(20, 'Fone Bluetooth JBL Tune 510BT', 'Fone de ouvido sem fio JBL com cancelamento de ruído', 399, NULL, 9),
+(21, 'Liquidificador Arno Power Max', 'Liquidificador 2L com 5 velocidades e filtro', 159.9, NULL, 10),
+(22, 'Cafeteira Nespresso Vertuo', 'Máquina de café expresso com 3 intensidades', 499, NULL, 11),
+(23, 'Livro - O Alquimista', 'Romance de Paulo Coelho, edição de bolso', 34.9, NULL, 12),
+(24, 'Cadeira Gamer ThunderX3 Core', 'Cadeira ergonômica para jogos, com ajuste de altura', 899.9, NULL, 13);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
 CREATE TABLE `usuario` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int(11) NOT NULL,
   `nome` varchar(24) NOT NULL,
   `sobrenome` varchar(255) DEFAULT NULL,
   `senha` varchar(24) NOT NULL,
   `email` varchar(24) NOT NULL,
-  `id_permissao` int DEFAULT NULL,
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `id_usuario` (`id_usuario`),
-  UNIQUE KEY `email` (`email`),
-  KEY `fk_permissao` (`id_permissao`),
-  CONSTRAINT `fk_permissao` FOREIGN KEY (`id_permissao`) REFERENCES `Permissoes` (`id_permissao`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+  `id_permissao` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id_usuario`, `nome`, `sobrenome`, `senha`, `email`, `id_permissao`) VALUES
+(1, 'william', NULL, '12345678', 'teste@teste.com', NULL),
+(16, 'Ana', 'Silva', 'senha123', 'ana.silva@email.com', 3),
+(17, 'Bruno', 'Souza', '123456', 'bruno.souza@email.com', 2),
+(18, 'Carlos', 'Almeida', 'admin123', 'carlos.almeida@email.com', 1),
+(19, 'Daniela', 'Lima', 'dani2025', 'daniela.lima@email.com', 3),
+(20, 'Eduardo', 'Oliveira', 'edu123', 'eduardo.oliveira@email.c', 2),
+(21, 'Fernanda', 'Costa', 'fernanda321', 'fernanda.costa@email.com', 3),
+(22, 'Gabriel', 'Melo', 'gabriel456', 'gabriel.melo@email.com', 3),
+(23, 'Helena', 'Rocha', 'helena789', 'helena.rocha@email.com', 2),
+(24, 'Igor', 'Martins', 'igorm123', 'igor.martins@email.com', 3),
+(25, 'Juliana', 'Pereira', 'juliana!@#', 'juliana.pereira@email.co', 1);
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`cd_categoria`),
+  ADD UNIQUE KEY `cd_categoria` (`cd_categoria`);
+
+--
+-- Índices de tabela `imagens`
+--
+ALTER TABLE `imagens`
+  ADD PRIMARY KEY (`cd_imagem`);
+
+--
+-- Índices de tabela `permissoes`
+--
+ALTER TABLE `permissoes`
+  ADD PRIMARY KEY (`id_permissao`);
+
+--
+-- Índices de tabela `produto`
+--
+ALTER TABLE `produto`
+  ADD PRIMARY KEY (`cd_produto`),
+  ADD UNIQUE KEY `cd_produto` (`cd_produto`),
+  ADD KEY `cd_categoria` (`cd_categoria`),
+  ADD KEY `fk_produto_imagem` (`cd_imagem`);
+
+--
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `id_usuario` (`id_usuario`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `fk_permissao` (`id_permissao`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `cd_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `imagens`
+--
+ALTER TABLE `imagens`
+  MODIFY `cd_imagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de tabela `permissoes`
+--
+ALTER TABLE `permissoes`
+  MODIFY `id_permissao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `produto`
+--
+ALTER TABLE `produto`
+  MODIFY `cd_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `produto`
+--
+ALTER TABLE `produto`
+  ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`cd_categoria`) REFERENCES `categoria` (`cd_categoria`) ON DELETE SET NULL;
+
+--
+-- Restrições para tabelas `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `fk_permissao` FOREIGN KEY (`id_permissao`) REFERENCES `permissoes` (`id_permissao`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2025-05-17 18:32:12
