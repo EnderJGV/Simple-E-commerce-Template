@@ -37,12 +37,11 @@
 /* HEADER */
 
 body {
-    height: 100vh;
-    padding-bottom: 10px;
+    max-width: 100%;
 }
 
 header{
-    width: 100vw;
+    width: 100%;
     border-bottom: 1px solid #a3a3a34d;
 }
 
@@ -932,7 +931,7 @@ a.button_featuared{
 .footer {
     background-color: var(--button-card);
     height: 440px;
-    width: 100vw;
+    width: 100%;
     color: var(--text-1);
     bottom: 0px;
     justify-content: center;
@@ -1261,9 +1260,9 @@ a.button_featuared{
 /* about */
 
 main .url_site{
-    position: relative;
-    left: 5rem;
-    top: 2rem;
+    position: absolute;
+    top: 10rem;
+    left: 8rem;
     color: var(--text-2);
 }
 
