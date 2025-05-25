@@ -21,8 +21,9 @@ function fillForm(product) {
  
  function getProduct(){
     return new Promise((resolve, reject)=> {
+        const productId = new URLSearchParams(window.location.search).get('id');
         const http = new XMLHttpRequest();
-    http.open('GET', '/api/product/26');
+    http.open('GET', `/api/product/${productId}`);
     http.send();
     http.onload = () => {
         const parsedResponse = JSON.parse(http.response);

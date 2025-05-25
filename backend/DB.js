@@ -43,6 +43,7 @@ class DB {
         const [ results ] = await this.connection.query(
             `
             SELECT 
+                p.cd_produto AS id,
                 p.cd_produto AS cdProduto,
                 p.nome AS nome,
                 c.nome AS categoria,
@@ -156,7 +157,7 @@ class DB {
     try {
         const [result] = await this.connection.query(`
             SELECT 
-                p.cd_produto AS cdProduto,
+                p.cd_produto AS id,
                 p.nome AS nome,
                 c.nome AS categoria,
                 p.preco,
