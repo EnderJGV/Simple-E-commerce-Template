@@ -222,41 +222,22 @@ header i:active{
     align-items: center;
 }
 
-/* Contenedor dos Nichos */
-.menu-banner-title{
-    width: 20%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    border-right: 1px solid #a3a3a34d;
-    font-weight: 400;
-    font-size: .8rem;
-    line-height: 2.4;
-    padding: 1rem;
-    transition: all 0.1s ease-in-out;
-}
-
-/* Hover : itens nichos */
-.itens-menu-title:hover{
-    color: var(--primary-black);
-    font-weight: 500;
-}
-
-.itens-menu-title:active{
-    color: var(--hover-button-1);
-    transition: all 0.1s ease-in-out;
-}
-
 .menu-content-ul{
     list-style: none;
     color: var(--primary-black);
 }
+.content-menu-banner-slides-card{
+    width: 100%;
+}
 
 .menu-banner-slides-card{
     background-color: var(--button-card);
-    width: 60vw;
+    width: 80%;
     height: 44vh;
-    margin-left: 2rem;
+    margin: 0 auto;
+    border-radius: 2rem;
+    box-shadow:  0 10px 20px rgba(0, 0, 0, 0.336);
+    padding-bottom: 2rem;
 }
 
 .content-text{
@@ -271,7 +252,7 @@ header i:active{
 }
 
 .content-text .content-text-title span{
-    font-size: .7rem;
+    font-size: .8rem;
 }
 .content-text .content-text-title img{
     width: 10%;
@@ -279,21 +260,21 @@ header i:active{
 }
 
 .content-text .content-text-description{
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 500;
-    width: 294px;
+    width: 500px;
     height: 120px;
+    margin-bottom: 3rem;
 
 }
 
 .content-text .content-text-button{
     position: relative;
-    margin-top: .4rem;
 }
 
 .content-text .content-text-button a{
     text-decoration: none;
-    font-size: .7rem;
+    font-size: 1rem;
     font-weight: 300;
     border-bottom: 1px solid var(--primary-white);
     color: var(--primary-white);
@@ -415,10 +396,11 @@ header i:active{
     color: var(--hover-button-1);
 }
 
-.content-card-products.collapsed{
+.content-card-products.collapsed {
     max-height: 487.2px;
     overflow: hidden;
     transition: max-height 0.5s ease;
+    gap: 2.8rem;
 }
 
 .content-card-products.expanded{
@@ -717,6 +699,7 @@ header i:active{
     background-color: var(--button-card);
     width: 70%;
     margin: 1rem auto;
+    border-radius: 2rem;
 }
 
 .info-bannerday{
