@@ -9,7 +9,7 @@ const app = express();
 const __dirname = path.resolve();
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 app.use(express.static(path.join(__dirname, '../frontend/public')))
-app.use(express.json({ limit: '20mb' }));
+app.use(express.json({ limit: '100mb' }));
 
 const { SERVER_PORT, SECRET, UPLOADS_PATH } = configDotenv().parsed;
 app.use(UPLOADS_PATH, express.static(path.join(__dirname, UPLOADS_PATH)));
@@ -71,15 +71,22 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/user/account', (req, res) => {
+    res.sendFile(path.join(__dirname, 'account.html'));
+});
+
 app.post('/login', async (req, res) => {
     try {
         const { userEmail, userPassword } = req.body || {};
         const user = await DB.userLogin(userEmail, userPassword);
         const { id_usuario, email, nome } = user;
-        const token = jwt.sign({user:{id_usuario, email, nome}}, SECRET, { expiresIn: 1800});
+        const token = jwt.sign({user:{id_usuario, email, nome}}, SECRET, { expiresIn: 10000000});
 
         return res.json({
             auth: true,
+            name: nome,
+            email: email,
+            permissions: null,
             token,
         })
 
@@ -93,17 +100,28 @@ app.post('/login', async (req, res) => {
 
 app.post('/user/updateUser', async (req,res) => {
     try {
-        const {userName, userLastName, userEmail, userAdress, userPassword, userNewPassWord} = req.body || {};
+        const {firstName, lastName, email, adress, currentPassword, newPassword} = req.body || {};
         const  payload = {
-            nome: userName,
-            sobrenome: userLastName,
-            email: userEmail,
-            endereco: userAdress,
-            senha: userNewPassWord,
+            nome: firstName,
+            sobrenome: lastName,
+            email: email,
+            endereco: adress,
+            oldPassword: currentPassword,
+            senha: newPassword,
         }
-        const response = await DB.updateUser()
-    } catch {
+        console.log(payload);
 
+        const response = await DB.updateUser(payload)
+
+        res.send({
+            error: false,
+            message: 'OK'
+        })
+    } catch(error) {
+        res.send({
+            error: true, 
+            message: 'Houve um erro ao tentar atualizar as informações do usuário. '+ error,
+        })
     }
 });
 
@@ -141,6 +159,18 @@ app.post('/user/register', async (req, res) => {
     }
 })
 
+app.get('/account', (req,res) => {
+    res.sendFile(path.join(__dirname, 'account.html'));
+})
+
+app.get('/produto', async (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/productDetails.html'));
+});
+
+app.get('/singup', async (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/singUp.html'));
+})
+
 app.get('/login', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
@@ -149,6 +179,17 @@ app.get('/user/profile', async(req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/account.html'));
 })
 
+app.get('/about', (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/about.html'));
+})
+
+app.get('/checkout', (req, res) => {
+    res.status(200).sendFile(path.join(__dirname, '../frontend/public/checkOut.html'));
+})
+
+app.get('/cart', (req, res) => {
+    res.status(200).sendFile(path.join(__dirname,'../frontend/public/cart.html'));
+});
 
 
 
@@ -192,6 +233,22 @@ app.post('/api/createCategory', async (req,res) => {
     }
 });
 
+app.get('/api/product/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await DB.getProduct(id);
+        res.json({
+            error: false,
+            data: product
+        });
+    } catch (error) {
+        res.json({
+            error: true,
+            data: error.message
+        });
+    }
+})
+
 app.post('/api/createProduct', async (req, res) => {
     try {
         const product = req.body || {};
@@ -230,6 +287,23 @@ app.get('/api/products', async (req,res) => {
         res.json({
             error: false,
             data
+        })
+
+    }catch(error){
+        res.json({
+            error: true,
+            message: error.message
+        })
+    }
+})
+
+app.get('/api/products/:categoryId', async (req,res) => {
+    try {
+        const { categoryId } = req.params;
+        const data = await DB.getProductsByCategory(categoryId);
+        res.json({
+            error: false,
+            data: data
         })
 
     }catch(error){

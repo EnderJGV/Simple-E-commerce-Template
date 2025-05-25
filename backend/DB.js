@@ -23,15 +23,32 @@ class DB {
             
     }
 
+ updateUser = async ({nome, email, senha}) => {
+    try {
+        const [ result ] = await this.connection.query(
+            `
+                UPDATE usuario SET nome = ?, senha = ?, email = ?
+                 WHERE email = ?;
+            `,[nome, senha, email, email]
+        );
+        console.log(result)
+        return result;
+    } catch (error) {
+        throw error;
+    }
+ }
+
   getProducts = async () => {
     try {
         const [ results ] = await this.connection.query(
             `
             SELECT 
+                p.cd_produto AS id,
                 p.cd_produto AS cdProduto,
                 p.nome AS nome,
                 c.nome AS categoria,
-                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens,
+                p.preco AS preco
             FROM 
                 produto p
             LEFT JOIN 
@@ -53,11 +70,45 @@ class DB {
     }
   }
 
+  getProductsByCategory = async (categoryId) => {
+    try {
+        const [ results ] = await this.connection.query(
+            `
+            SELECT 
+                p.cd_produto AS cdProduto,
+                p.nome AS nome,
+                c.nome AS categoria,
+                p.preco As preco,
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
+            FROM 
+                produto p
+            LEFT JOIN 
+                categoria c
+            ON
+                p.cd_categoria = c.cd_categoria
+            LEFT JOIN
+                imagens i
+            ON 
+                p.cd_produto = i.cd_produto
+            WHERE
+                p.cd_categoria = ?
+            GROUP BY
+                p.cd_produto, p.nome, c.nome;
+            `,
+            [categoryId]
+        );
+
+        return results;
+    } catch(error) {
+        throw error;
+    }
+  }
+
   insertUser = async (userName, userlastName, userPassword, userEmail, userAddress = '') => {
     try {
         // @TODO userAddress
         const result = await this.connection.query(
-            'INSERT INTO usuario (nome, sobrenome, senha, email) VALUES (?, ?, ?)',
+            'INSERT INTO usuario (nome, sobrenome, senha, email) VALUES (?, ?, ?, ?)',
             [userName, userlastName, userPassword, userEmail]
         )
         return result;
@@ -99,6 +150,37 @@ class DB {
          };
     } catch(error) {
         throw new Error('Houve um erro ao inserir produto' + error);
+    }
+  }
+
+  getProduct = async (cdProduto) => {
+    try {
+        const [result] = await this.connection.query(`
+            SELECT 
+                p.cd_produto AS id,
+                p.nome AS nome,
+                c.nome AS categoria,
+                p.preco,
+                p.descricao,
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
+            FROM 
+                produto p
+            LEFT JOIN 
+                categoria c
+            ON
+                p.cd_categoria = c.cd_categoria
+            LEFT JOIN
+                imagens i
+            ON 
+                p.cd_produto = i.cd_produto
+            WHERE
+                p.cd_produto = ?
+            GROUP BY
+                p.cd_produto, p.nome, c.nome;
+            `,[cdProduto]);
+        return result;
+    } catch(error) {
+        throw error;
     }
   }
 

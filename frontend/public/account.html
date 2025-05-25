@@ -7,7 +7,7 @@
     <!-- ICON SITE -->
     <link rel="shortcut icon" href="main/img/store-front.png" type="image/x-icon">
     <!-- CSS MAIN -->
-     <link rel="stylesheet" href="/css/main.css">
+     <link rel="stylesheet" href="./css/main.css">
 
      <!-- FONT AWESOME -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -18,12 +18,12 @@
             <p>Desconto de % para compras <span>acima de R$ 100</span></p>
         </div>
         <div class="header_content">
-            <span>Exclusive</span>
+            <span><a href="/index.html">Exclusive</a></span>
             <ul>
-                <li>Home</li>
-                <li>Contact</li>
-                <li>About</li>
-                <li>Sign Up</li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/singUp.html">Sign Up</a></li>
             </ul>
             <div class="search_store_itens">
                 <div class="search">
@@ -31,8 +31,12 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <div class="store_itens">
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <a href="/404">
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                    <a href="/cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -49,14 +53,14 @@
         </div>
 
         <div class="containerForm">
-            <form>
+            <form id="form">
 
                 <span style="grid-column:1 /span 2">Edite seu perfil</span>
 
 
                 <div style="grid-column: 1 /span 2" class="container-input">
                     <label for="firstName">Primeiro nome</label>
-                    <input name="firstName" type="text">
+                    <input name="firstName" type="text" id="firstName">
                 </div>
 
 
@@ -67,7 +71,7 @@
 
                 <div style="grid-column: 1 /span 2" class="container-input">
                     <label for="email">Email</label>
-                    <input name="email" type="text" placeholder="exemplo@gmail.com">
+                    <input name="email" type="text" placeholder="exemplo@gmail.com" id="email">
                 </div>
 
                 <div style="grid-column: 3 /span 2" class="container-input">
@@ -94,7 +98,7 @@
                 <button class="button-flat">
                     Cancelar
                 </button>
-                <button class="button-red">
+                <button class="button-red" id="btnSave">
                     Salvar Alterações
                 </button>
 
@@ -108,4 +112,36 @@
 
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+        const userdata=sessionStorage.getItem("user");
+        console.log(userdata);
+        if(userdata){
+            const {name, email} =JSON.parse(userdata)
+            document.getElementById("firstName").value=name;
+            document.getElementById("email").value=email;
+        }
+    })
+
+    function sendData(data){
+        const http= new XMLHttpRequest();
+        http.open("POST","/user/updateUser");
+        http.setRequestHeader("Content-Type", "application/json");
+        http.send(JSON.stringify(data));
+        http.onload =()=>{
+            alert(http.response);
+        }
+    }
+
+    document.getElementById("btnSave").addEventListener("click", ()=>{
+        const formElement=document.getElementById("form");
+        const formData= new FormData(formElement);
+        console.log(formData);
+        const data= Object.fromEntries(formData.entries());
+        console.log(data);
+        sendData(data);
+    
+    })
+
+</script>
 </html>

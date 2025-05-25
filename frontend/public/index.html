@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto JS - Leila</title>
+    <title>My e-commerce</title>
     <!-- ICON SITE -->
-    <link rel="shortcut icon" href="main/img/store-front.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/10919715.png" type="image/x-icon">
     <!-- CSS MAIN -->
      <link rel="stylesheet" href="css/main.css">
 
@@ -18,12 +18,12 @@
             <p>Desconto de 10% para compras <span>acima de R$ 100</span></p>
         </div>
         <div class="header_content">
-            <span>Exclusive</span>
+            <span><a href="/index.html">Exclusive</a></span>
             <ul>
-                <li>Home</li>
-                <li>Contact</li>
-                <li>About</li>
-                <li>Sign Up</li>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/singUp.html">Sign Up</a></li>
             </ul>
             <div class="search_store_itens">
                 <div class="search">
@@ -31,9 +31,16 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <div class="store_itens">
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <i class="fa-solid fa-user"></i>
+                    <a href="/404">
+                        <i class="fa-regular fa-heart"></i>
+                    </a>
+                    <a href="/cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <a href="/login">
+                        <span>Log In</span>
+                        <i class="fa-solid fa-user"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -92,19 +99,19 @@
                 <div class="timer">
                     <div class="timer-number">
                         <span class="title-timer">Day</span>
-                        <span class="number-timer">00</span>
+                        <span class="number-timer" id="days">00</span>
                     </div>
                     <div class="timer-number">
                         <span class="title-timer">Hours</span>
-                        <span class="number-timer">00</span>
+                        <span class="number-timer" id="hours">00</span>
                     </div>
                     <div class="timer-number">
                         <span class="title-timer">Minutes</span>
-                        <span class="number-timer">00</span>
+                        <span class="number-timer" id="minutes">00</span>
                     </div>
                     <div class="timer-number">
                         <span class="title-timer">Seconds</span>
-                        <span class="number-timer">00</span>
+                        <span class="number-timer" id="seconds">00</span>
                     </div>
                 </div>
                 <div class="setas">
@@ -121,7 +128,35 @@
                             <i class="fa-solid fa-eye" id="fa-eye"></i>
                         </div>
                         <div class="product-img">
-                            <img src="./img/g92-2-500x500 1.png" alt="produto">
+                            <img src="./img/Copa_Sense 1.png" alt="produto">
+                        </div>
+                        <button class="button-card">Add To Cart</button>
+                    </div>
+                    <div class="product-card-text">
+                        <p>HAVIT HV-G92 Gamepad</p>
+                        <div class="price">
+                            <span class="principal">$120</span>
+                            <span class="secundario">$160</span>
+                        </div>
+                        <div class="stars">
+                            <p>
+                                <span>★★★★★</span> (+100)
+                            </p>
+                        </div>
+                        <div class="button-view">
+                            <button class="button-view-product">View Product</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div>
+                        <div class="descont-product">
+                            <span>-48%</span>
+                            <i class="fa-solid fa-heart" id="fa-heart"></i>
+                            <i class="fa-solid fa-eye" id="fa-eye"></i>
+                        </div>
+                        <div class="product-img">
+                            <img src="./img/Frame 604 (1).png" alt="produto">
                         </div>
                         <button class="button-card">Add To Cart</button>
                     </div>
@@ -146,7 +181,7 @@
                             <i class="fa-solid fa-eye" id="fa-eye"></i>
                         </div>
                         <div class="product-img">
-                            <img src="./img/g92-2-500x500 1.png" alt="produto">
+                            <img src="./img/Frame 604 (2).png" alt="produto">
                         </div>
                         <button class="button-card">Add To Cart</button>
                     </div>
@@ -171,7 +206,7 @@
                             <i class="fa-solid fa-eye" id="fa-eye"></i>
                         </div>
                         <div class="product-img">
-                            <img src="./img/g92-2-500x500 1.png" alt="produto">
+                            <img src="./img/Frame 606.png" alt="produto">
                         </div>
                         <button class="button-card">Add To Cart</button>
                     </div>
@@ -196,7 +231,7 @@
                             <i class="fa-solid fa-eye" id="fa-eye"></i>
                         </div>
                         <div class="product-img">
-                            <img src="./img/g92-2-500x500 1.png" alt="produto">
+                            <img src="./img/Frame 608.png" alt="produto">
                         </div>
                         <button class="button-card">Add To Cart</button>
                     </div>
@@ -221,32 +256,7 @@
                             <i class="fa-solid fa-eye" id="fa-eye"></i>
                         </div>
                         <div class="product-img">
-                            <img src="./img/g92-2-500x500 1.png" alt="produto">
-                        </div>
-                        <button class="button-card">Add To Cart</button>
-                    </div>
-                    <div class="product-card-text">
-                        <p>HAVIT HV-G92 Gamepad</p>
-                        <div class="price">
-                            <span class="principal">$120</span>
-                            <span class="secundario">$160</span>
-                        </div>
-                        <div class="stars">
-                            <p>
-                                <span>★★★★★</span> (+100)
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div>
-                        <div class="descont-product">
-                            <span>-48%</span>
-                            <i class="fa-solid fa-heart" id="fa-heart"></i>
-                            <i class="fa-solid fa-eye" id="fa-eye"></i>
-                        </div>
-                        <div class="product-img">
-                            <img src="./img/g92-2-500x500 1.png" alt="produto">
+                            <img src="./img/Frame 610.png" alt="produto">
                         </div>
                         <button class="button-card">Add To Cart</button>
                     </div>
@@ -292,26 +302,26 @@
                         </li>
                         <li class="item-categorias">
                             <a href="#">
-                                <i class="fa-solid fa-house"></i>
-                                <span>Categoria</span>
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Mobile</span>
                             </a>
                         </li>
                         <li class="item-categorias">
                             <a href="#">
-                                <i class="fa-solid fa-house"></i>
-                                <span>Categoria</span>
+                                <i class="fas fa-tablet-alt"></i>
+                                <span>Tablet</span>
                             </a>
                         </li>
                         <li class="item-categorias">
                             <a href="#">
-                                <i class="fa-solid fa-house"></i>
-                                <span>Categoria</span>
+                                <i class="fas fa-camera"></i>
+                                <span>Camera</span>
                             </a>
                         </li>
                         <li class="item-categorias">
                             <a href="#">
-                                <i class="fa-solid fa-house"></i>
-                                <span>Categoria</span>
+                                <i class="fas fa-gamepad"></i>
+                                <span>Gaming</span>
                             </a>
                         </li>
                     </ul>
@@ -347,6 +357,74 @@
                     <img src="img/Frame 694.png" alt="">
                 </div>
             </div>
+        </section>
+        <section class="explore-products">
+            <section class="categoria-sales">
+                <div class="categoria-sales-title">
+                    <div><span id="title">Our Products</span></div>
+                </div>
+                <div class="categoria-sales-content">
+                    <h3>Explore Our Products</h3>
+                </div>
+                <div class="content-card-products" id="content-card-products">
+                    
+                </div>
+                <div class="button-product-card">
+                    <button type="button" class="product-card-button">View all Products</button>
+                </div>
+            </section>
+        </section>
+        <section class="new-arrial">
+            <section class="categoria-sales">
+                <div class="categoria-sales-title">
+                    <div><span id="title">Featuared</span></div>
+                </div>
+                <div class="categoria-sales-content">
+                    <h3>New Arrial</h3>
+                </div>
+                <div class="parent-featuared">
+                    <div class="product-featuared_1">
+                        <div class="img_featuared">
+                            <img src="img/ps5-slim-goedkope-playstation_large 1.png" alt="">
+                        </div>
+                        <div class="text_featuared">
+                            <p class="title_featuared">Playstation 5</p>
+                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
+                            <a href="http://" class="button_featuared">Show Now</a>
+                        </div>
+                    </div>
+                    <div class="product-featuared_2">
+                        <div class="img_featuared">
+                            <img src="img/attractive-woman-wearing-hat-posing-black-background 1.png" alt="">
+                        </div>
+                        <div class="text_featuared_2">
+                            <p class="title_featuared">Playstation 5</p>
+                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
+                            <a href="http://" class="button_featuared">Show Now</a>
+                        </div>
+                    </div>
+                    <div class="product-featuared_3">
+                        <div class="img_featuared">
+                            <img src="img/Frame 706.png" alt="">
+                        </div>
+                        <div class="text_featuared">
+                            <p class="title_featuared">Playstation 5</p>
+                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
+                            <a href="http://" class="button_featuared">Show Now</a>
+                        </div>
+                    </div>
+                    <div class="product-featuared_4">
+                        <div class="img_featuared">
+                            <img src="img/Frame 707.png" alt="">
+                        </div>
+                        <div class="text_featuared">
+                            <p class="title_featuared">Playstation 5</p>
+                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
+                            <a href="http://" class="button_featuared">Show Now</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </section>
     </div>
     <div class="footer">
