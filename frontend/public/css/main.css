@@ -407,6 +407,7 @@ header i:active{
     max-height: fit-content;
     overflow: hidden;
     transition: max-height 0.5s ease;
+    gap: 2.8rem;
 }
 
 .content-card-products{
