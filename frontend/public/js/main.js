@@ -153,7 +153,7 @@ const element = `
             </p>
         </div>
         <div class="button-view">
-            <button class="button-view-product">View Product</button>
+            <button onclick ="window.location.href = '/produto?id=${id}'" class="button-view-product">View Product</button>
         </div>
     </div>
   `;
