@@ -3,11 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25/05/2025 às 15:25
+-- Tempo de geração: 25/05/2025 às 16:08
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
-
-USE eccomerce;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -22,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `eccomerce`
 --
-USE ecommerce;
+CREATE DATABASE IF NOT EXISTS `eccomerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `eccomerce`;
 
 -- --------------------------------------------------------
 
@@ -30,6 +29,7 @@ USE ecommerce;
 -- Estrutura para tabela `categoria`
 --
 
+DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE `categoria` (
   `cd_categoria` int(11) NOT NULL,
   `nome` varchar(20) DEFAULT NULL,
@@ -54,30 +54,32 @@ INSERT INTO `categoria` (`cd_categoria`, `nome`, `estado`, `imagem`) VALUES
 -- Estrutura para tabela `imagens`
 --
 
+DROP TABLE IF EXISTS `imagens`;
 CREATE TABLE `imagens` (
   `cd_imagem` int(11) NOT NULL,
   `nome` varchar(25) DEFAULT NULL,
-  `caminho` varchar(30) DEFAULT NULL
+  `caminho` varchar(30) DEFAULT NULL,
+  `cd_produto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `imagens`
 --
 
-INSERT INTO `imagens` (`cd_imagem`, `nome`, `caminho`) VALUES
-(1, '1745196845103.jpeg', '/uploads/1745196845103.jpeg'),
-(2, '1745196950438.jpeg', '/uploads/1745196950438.jpeg'),
-(3, '1745197131527.jpeg', '/uploads/1745197131527.jpeg'),
-(4, 'Smartphone Galaxy A14', 'https://images.samsung.com/is/'),
-(5, 'Notebook Dell Inspiron', 'https://m.media-amazon.com/ima'),
-(6, 'Camisa Polo Azul', 'https://img.freepik.com/fotos-'),
-(7, 'Tênis Nike Revolution 7', 'https://static.nike.com/a/imag'),
-(8, 'Mouse Gamer Redragon Cobr', 'https://m.media-amazon.com/ima'),
-(9, 'Fone Bluetooth JBL Tune 5', 'https://m.media-amazon.com/ima'),
-(10, 'Liquidificador Arno Power', 'https://m.media-amazon.com/ima'),
-(11, 'Cafeteira Nespresso Vertu', 'https://m.media-amazon.com/ima'),
-(12, 'Livro - O Alquimista', 'https://m.media-amazon.com/ima'),
-(13, 'Cadeira Gamer ThunderX3 C', 'https://m.media-amazon.com/ima');
+INSERT INTO `imagens` (`cd_imagem`, `nome`, `caminho`, `cd_produto`) VALUES
+(1, '1745196845103.jpeg', '/uploads/1745196845103.jpeg', NULL),
+(2, '1745196950438.jpeg', '/uploads/1745196950438.jpeg', NULL),
+(3, '1745197131527.jpeg', '/uploads/1745197131527.jpeg', NULL),
+(4, 'Smartphone Galaxy A14', 'https://images.samsung.com/is/', 15),
+(5, 'Notebook Dell Inspiron', 'https://m.media-amazon.com/ima', 16),
+(6, 'Camisa Polo Azul', 'https://img.freepik.com/fotos-', 17),
+(7, 'Tênis Nike Revolution 7', 'https://static.nike.com/a/imag', 18),
+(8, 'Mouse Gamer Redragon Cobr', 'https://m.media-amazon.com/ima', 19),
+(9, 'Fone Bluetooth JBL Tune 5', 'https://m.media-amazon.com/ima', 20),
+(10, 'Liquidificador Arno Power', 'https://m.media-amazon.com/ima', 21),
+(11, 'Cafeteira Nespresso Vertu', 'https://m.media-amazon.com/ima', 22),
+(12, 'Livro - O Alquimista', 'https://m.media-amazon.com/ima', 23),
+(13, 'Cadeira Gamer ThunderX3 C', 'https://m.media-amazon.com/ima', 24);
 
 -- --------------------------------------------------------
 
@@ -85,6 +87,7 @@ INSERT INTO `imagens` (`cd_imagem`, `nome`, `caminho`) VALUES
 -- Estrutura para tabela `permissoes`
 --
 
+DROP TABLE IF EXISTS `permissoes`;
 CREATE TABLE `permissoes` (
   `id_permissao` int(11) NOT NULL,
   `nome` varchar(20) NOT NULL,
@@ -111,30 +114,30 @@ INSERT INTO `permissoes` (`id_permissao`, `nome`, `criar_produto`, `excluir_prod
 -- Estrutura para tabela `produto`
 --
 
+DROP TABLE IF EXISTS `produto`;
 CREATE TABLE `produto` (
   `cd_produto` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL,
   `descricao` varchar(100) DEFAULT NULL,
   `preco` float DEFAULT NULL,
-  `cd_categoria` int(11) DEFAULT NULL,
-  `cd_imagem` int(11) DEFAULT NULL
+  `cd_categoria` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Despejando dados para a tabela `produto`
 --
 
-INSERT INTO `produto` (`cd_produto`, `nome`, `descricao`, `preco`, `cd_categoria`, `cd_imagem`) VALUES
-(15, 'Smartphone Galaxy A14', 'Smartphone Samsung 64GB, Android 13', 1299.99, NULL, 4),
-(16, 'Notebook Dell Inspiron', 'Notebook com Intel Core i5, 8GB RAM e SSD 256GB', 3599, NULL, 5),
-(17, 'Camisa Polo Azul', 'Camisa polo de algodão azul marinho tamanho M', 89.9, NULL, 6),
-(18, 'Tênis Nike Revolution 7', 'Tênis esportivo masculino Nike, preto', 249.5, NULL, 7),
-(19, 'Mouse Gamer Redragon Cobra M711', 'Mouse com sensor de alta precisão e RGB', 129.9, NULL, 8),
-(20, 'Fone Bluetooth JBL Tune 510BT', 'Fone de ouvido sem fio JBL com cancelamento de ruído', 399, NULL, 9),
-(21, 'Liquidificador Arno Power Max', 'Liquidificador 2L com 5 velocidades e filtro', 159.9, NULL, 10),
-(22, 'Cafeteira Nespresso Vertuo', 'Máquina de café expresso com 3 intensidades', 499, NULL, 11),
-(23, 'Livro - O Alquimista', 'Romance de Paulo Coelho, edição de bolso', 34.9, NULL, 12),
-(24, 'Cadeira Gamer ThunderX3 Core', 'Cadeira ergonômica para jogos, com ajuste de altura', 899.9, NULL, 13);
+INSERT INTO `produto` (`cd_produto`, `nome`, `descricao`, `preco`, `cd_categoria`) VALUES
+(15, 'Smartphone Galaxy A14', 'Smartphone Samsung 64GB, Android 13', 1299.99, 1),
+(16, 'Notebook Dell Inspiron', 'Notebook com Intel Core i5, 8GB RAM e SSD 256GB', 3599, 1),
+(17, 'Camisa Polo Azul', 'Camisa polo de algodão azul marinho tamanho M', 89.9, 2),
+(18, 'Tênis Nike Revolution 7', 'Tênis esportivo masculino Nike, preto', 249.5, 2),
+(19, 'Mouse Gamer Redragon Cobra M711', 'Mouse com sensor de alta precisão e RGB', 129.9, 1),
+(20, 'Fone Bluetooth JBL Tune 510BT', 'Fone de ouvido sem fio JBL com cancelamento de ruído', 399, 1),
+(21, 'Liquidificador Arno Power Max', 'Liquidificador 2L com 5 velocidades e filtro', 159.9, 3),
+(22, 'Cafeteira Nespresso Vertuo', 'Máquina de café expresso com 3 intensidades', 499, 3),
+(23, 'Livro - O Alquimista', 'Romance de Paulo Coelho, edição de bolso', 34.9, 4),
+(24, 'Cadeira Gamer ThunderX3 Core', 'Cadeira ergonômica para jogos, com ajuste de altura', 899.9, 5);
 
 -- --------------------------------------------------------
 
@@ -142,6 +145,7 @@ INSERT INTO `produto` (`cd_produto`, `nome`, `descricao`, `preco`, `cd_categoria
 -- Estrutura para tabela `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(24) NOT NULL,
@@ -183,7 +187,8 @@ ALTER TABLE `categoria`
 -- Índices de tabela `imagens`
 --
 ALTER TABLE `imagens`
-  ADD PRIMARY KEY (`cd_imagem`);
+  ADD PRIMARY KEY (`cd_imagem`),
+  ADD KEY `fk_cd_produto` (`cd_produto`);
 
 --
 -- Índices de tabela `permissoes`
@@ -197,8 +202,7 @@ ALTER TABLE `permissoes`
 ALTER TABLE `produto`
   ADD PRIMARY KEY (`cd_produto`),
   ADD UNIQUE KEY `cd_produto` (`cd_produto`),
-  ADD KEY `cd_categoria` (`cd_categoria`),
-  ADD KEY `fk_produto_imagem` (`cd_imagem`);
+  ADD KEY `cd_categoria` (`cd_categoria`);
 
 --
 -- Índices de tabela `usuario`
@@ -246,6 +250,12 @@ ALTER TABLE `usuario`
 --
 -- Restrições para tabelas despejadas
 --
+
+--
+-- Restrições para tabelas `imagens`
+--
+ALTER TABLE `imagens`
+  ADD CONSTRAINT `fk_cd_produto` FOREIGN KEY (`cd_produto`) REFERENCES `produto` (`cd_produto`);
 
 --
 -- Restrições para tabelas `produto`
