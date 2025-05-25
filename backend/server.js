@@ -9,7 +9,7 @@ const app = express();
 const __dirname = path.resolve();
 app.use('/admin', express.static(path.join(__dirname, 'admin')));
 app.use(express.static(path.join(__dirname, '../frontend/public')))
-app.use(express.json({ limit: '20mb' }));
+app.use(express.json({ limit: '100mb' }));
 
 const { SERVER_PORT, SECRET, UPLOADS_PATH } = configDotenv().parsed;
 app.use(UPLOADS_PATH, express.static(path.join(__dirname, UPLOADS_PATH)));
@@ -232,10 +232,10 @@ app.post('/api/createCategory', async (req,res) => {
     }
 });
 
-app.get(`/api/product/:id`, async (req, res) => {
+app.get('/api/product/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await DB.getProductById(id);
+        const product = await DB.getProduct(id);
         res.json({
             error: false,
             data: product
