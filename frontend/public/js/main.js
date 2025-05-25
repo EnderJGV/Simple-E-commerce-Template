@@ -78,6 +78,7 @@ function getProducts() {
             } else {
                 resolve(response.data.map((product) =>{
                     return {
+                        id: product.id,
                         name: product.nome,
                         description: product.descricao,
                         image: product.imagens ? product.imagens.split(';')[0] : null,
@@ -116,13 +117,20 @@ async function renderProducts() {
 }
 
 function productCardComponent({ 
-    name, description, image, price, classification, originalPrice, discount
+    id,
+    name,
+    description,
+    image,
+    price,
+    classification,
+    originalPrice,
+    discount
 }) {
 console.log(image);
 const wrapper = document.createElement('div');
 wrapper.classList.add('product-card');
 const element = `
-    <div>
+    <div onclick ="window.location.href = '/produto?id=${id}'">
         <div class="descont-product">
             <span>-{discount}%</span>
             <i class="fa-solid fa-heart" id="fa-heart"></i>
