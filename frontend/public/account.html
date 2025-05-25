@@ -148,7 +148,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", ()=>{
         const userdata=sessionStorage.getItem("user");
-        console.log(userdata);
         if(userdata){
             const {name, email} =JSON.parse(userdata)
             document.getElementById("firstName").value=name;
@@ -169,9 +168,7 @@
     document.getElementById("btnSave").addEventListener("click", ()=>{
         const formElement=document.getElementById("form");
         const formData= new FormData(formElement);
-        console.log(formData);
         const data= Object.fromEntries(formData.entries());
-        console.log(data);
         sendData(data);
     
     })

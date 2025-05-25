@@ -10,12 +10,12 @@ function fillForm(product) {
     document.getElementById("product-name").innerText = product.nome
     document.getElementById("product-price").innerText = "R$ " + product.preco
     document.getElementById("product-description").innerText = product.descricao
-    const imgTumbeNail = document.getElementsByClassName("img-thumbnail")
+    const imgThumbnail = document.getElementsByClassName("img-thumbnail")
 
     const img = product.imagens === null ? [] : product.imagens.split(";")
-        document.getElementsByClassName('product-img')[0].src = img[0];
-    for(i = 1; i < 5; i++ ){
-        imgTumbeNail[i].src = img[i] ?? null;
+        document.getElementsByClassName('product-img')[0].src = img[0] ?? '../img/no-image.png';
+    for(i = 0; i <= 4; i++ ){
+        imgThumbnail[i].src = img[i] ?? '../img/no-image.png';
     }
 }
  

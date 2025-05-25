@@ -156,6 +156,9 @@ app.post('/user/register', async (req, res) => {
     }
 })
 
+app.get('/account', (req,res) => {
+    res.sendFile(path.join(__dirname, '../frontend/public/account.html'));
+})
 
 app.get('/produto', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/productDetails.html'));

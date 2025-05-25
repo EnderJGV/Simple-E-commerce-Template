@@ -92,25 +92,25 @@
         </section>
         <section class="flash-sales">
             <div class="flash-sales-title">
-                <div><span id="title">Today's</span></div>
+                <div><span id="title">Preço baixo</span></div>
             </div>
             <div class="flash-sales-content">
-                <h3>Flash Sales</h3>
+                <h3>Ofertas Relâmpago</h3>
                 <div class="timer">
                     <div class="timer-number">
-                        <span class="title-timer">Day</span>
+                        <span class="title-timer">Dias</span>
                         <span class="number-timer" id="days">00</span>
                     </div>
                     <div class="timer-number">
-                        <span class="title-timer">Hours</span>
+                        <span class="title-timer">Horas</span>
                         <span class="number-timer" id="hours">00</span>
                     </div>
                     <div class="timer-number">
-                        <span class="title-timer">Minutes</span>
+                        <span class="title-timer">Minutos</span>
                         <span class="number-timer" id="minutes">00</span>
                     </div>
                     <div class="timer-number">
-                        <span class="title-timer">Seconds</span>
+                        <span class="title-timer">Segundos</span>
                         <span class="number-timer" id="seconds">00</span>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <i class="fa-solid fa-arrow-right" id="fa-arrow-right_setas"></i>
                 </div>
             </div>
-            <div class="content-card-products">
+            <div class="content-card-products collapsed" id="flash-sales-collapse-card">
                 <div class="product-card">
                     <div>
                         <div class="descont-product">
@@ -275,24 +275,23 @@
                 </div>
             </div>
             <div class="button-product-card">
-                <button type="button" class="product-card-button">View all Products</button>
+                <button type="button" class="product-card-button"  onclick="toggleCollapseCard(this, 'flash-sales-collapse-card')">Mostrar mais</button>
             </div>
         </section>
         <section class="categoria-container">
             <section class="categoria-sales">
                 <div class="categoria-sales-title">
-                    <div><span id="title">Categories</span></div>
+                    <div><span id="title">Categorias</span></div>
                 </div>
                 <div class="categoria-sales-content">
-                    <h3>Browse By Category</h3>
+                    <h3>Navegue por categoria</h3>
                     <div class="setas">
                         <i class=" set fa-solid fa-arrow-left" id="fa-arrow-left_setas_categorias"></i>
                         <i class="fa-solid fa-arrow-right" id="fa-arrow-right_setas_categorias"></i>
                     </div>
                 </div>
-                <div class="content-card-products">
+                <div class="content-card-categories">
                     <!-- categorias -->
-
                     <ul class="categorias">
                         <li class="item-categorias">
                             <a href="#">
@@ -361,66 +360,66 @@
         <section class="explore-products">
             <section class="categoria-sales">
                 <div class="categoria-sales-title">
-                    <div><span id="title">Our Products</span></div>
+                    <div><span id="title">Produtos</span></div>
                 </div>
                 <div class="categoria-sales-content">
-                    <h3>Explore Our Products</h3>
+                    <h3>Veja nossos produtos</h3>
                 </div>
-                <div class="content-card-products" id="content-card-products">
+                <div class="content-card-products collapsed" id="content-card-products">
                     
                 </div>
                 <div class="button-product-card">
-                    <button type="button" class="product-card-button">View all Products</button>
+                    <button type="button" class="product-card-button" onclick="toggleCollapseCard(this, 'content-card-products')">Mostrar mais</button>
                 </div>
             </section>
         </section>
         <section class="new-arrial">
             <section class="categoria-sales">
                 <div class="categoria-sales-title">
-                    <div><span id="title">Featuared</span></div>
+                    <div><span id="title">Destaques</span></div>
                 </div>
                 <div class="categoria-sales-content">
-                    <h3>New Arrial</h3>
+                    <h3>Chegou agora</h3>
                 </div>
                 <div class="parent-featuared">
                     <div class="product-featuared_1">
                         <div class="img_featuared">
                             <img src="img/ps5-slim-goedkope-playstation_large 1.png" alt="">
-                        </div>
-                        <div class="text_featuared">
-                            <p class="title_featuared">Playstation 5</p>
-                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
-                            <a href="http://" class="button_featuared">Show Now</a>
+                            <div class="text_featuared left-bottom">
+                                <p class="title_featuared">Playstation 5</p>
+                                <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
+                                <a href="http://" class="button_featuared">Show Now</a>
+                            </div>
                         </div>
                     </div>
                     <div class="product-featuared_2">
                         <div class="img_featuared">
                             <img src="img/attractive-woman-wearing-hat-posing-black-background 1.png" alt="">
-                        </div>
-                        <div class="text_featuared_2">
-                            <p class="title_featuared">Playstation 5</p>
-                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
-                            <a href="http://" class="button_featuared">Show Now</a>
+                            <div class="text_featuared left-bottom">
+                                <p class="title_featuared">Women’s Collections</p>
+                                <span class="desc_featuared">Featured woman collections that give you another vibe.</span>
+                                <a href="http://" class="button_featuared">Show Now</a>
+                            </div>
                         </div>
                     </div>
                     <div class="product-featuared_3">
                         <div class="img_featuared">
                             <img src="img/Frame 706.png" alt="">
-                        </div>
-                        <div class="text_featuared">
-                            <p class="title_featuared">Playstation 5</p>
-                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
-                            <a href="http://" class="button_featuared">Show Now</a>
+                            <div class="text_featuared left-bottom">
+                                <p class="title_featuared">Perfume</p>
+                                <span class="desc_featuared">GUCCI INTENSE OUD EDP.</span>
+                                <a href="http://" class="button_featuared">Show Now</a>
+                            </div>
                         </div>
                     </div>
                     <div class="product-featuared_4">
                         <div class="img_featuared">
                             <img src="img/Frame 707.png" alt="">
-                        </div>
-                        <div class="text_featuared">
-                            <p class="title_featuared">Playstation 5</p>
-                            <span class="desc_featuared">Black and White version of the PS5 coming out on sale.</span>
-                            <a href="http://" class="button_featuared">Show Now</a>
+                            <div class="text_featuared left-bottom">
+                                <p class="title_featuared">Speakers</p>
+                                <span class="desc_featuared">Amazon wireless speakers</span>
+                                <a href="http://" class="button_featuared">Show Now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -466,6 +465,6 @@
             </div>
         </div>
     </div>
-    <script src="./js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>

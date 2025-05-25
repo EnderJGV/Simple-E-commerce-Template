@@ -1,3 +1,5 @@
+import { textLimiter, currencyFormatter } from "./util/formatter.js";
+
 window.addEventListener('scroll',function(){
     const header = document.querySelector('.header_content');
     const header_desconto = document.querySelector('.text_desconto');
@@ -23,6 +25,7 @@ function toggleMenu(){
     navigation.classList.toggle('active');
 };
 
+window.toggleMenu = toggleMenu;
 
 // criando o relogio
 
@@ -116,6 +119,29 @@ async function renderProducts() {
     
 }
 
+function scrollToElement(element, offset = 200) {
+    const y = element.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
+function toggleCollapseCard(buttonElement, containerName) {
+    const container = document.getElementById(containerName);
+    const isExpanded = container.classList.contains('expanded');
+
+    if (isExpanded) {
+        container.classList.remove('expanded');
+        container.classList.add('collapsed');
+        scrollToElement(container);
+    } else {
+        container.classList.remove('collapsed');
+        container.classList.add('expanded');
+        scrollToElement(container.lastElementChild);
+    }
+    buttonElement.textContent = isExpanded ? 'Mostrar mais' : 'Mostar menos';
+}
+
+window.toggleCollapseCard = toggleCollapseCard;
+
 function productCardComponent({ 
     id,
     name,
@@ -126,7 +152,6 @@ function productCardComponent({
     originalPrice,
     discount
 }) {
-console.log(image);
 const wrapper = document.createElement('div');
 wrapper.classList.add('product-card');
 const element = `
@@ -142,19 +167,19 @@ const element = `
         <button class="button-card">Add To Cart</button>
     </div>
     <div class="product-card-text">
-        <p>${name}</p>
+        <p>${textLimiter(name, 35)}</p>
         <div class="price">
-            <span class="principal">R$ ${price}</span>
-            <span class="secundario">R$ ${price + 100}</span>
+            <span class="principal">${currencyFormatter(price)}</span>
+            <span class="secundario">${currencyFormatter(price + 100)}</span>
         </div>
-        <div class="stars">
-            <p>
-                <span>★★★★★</span> (+100)
-            </p>
-        </div>
-        <div class="button-view">
+    </div>
+    <div class="stars">
+        <p>
+            <span>★★★★★</span> (+100)
+        </p>
+    </div>
+    <div class="button-view">
             <button onclick ="window.location.href = '/produto?id=${id}'" class="button-view-product">View Product</button>
-        </div>
     </div>
   `;
 
