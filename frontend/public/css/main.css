@@ -1379,9 +1379,6 @@ main .url_site span{
     }
 }
 
-.contact_form{
-    
-}
 
 .contact .contact_form{
     display: flex;
@@ -1414,4 +1411,152 @@ main .url_site span{
     border-radius: 4px;
     margin-right: 1rem;
     margin-top: 1rem;
+}
+
+.container_cart{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 4rem;
+}
+
+.content_block{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+}
+
+.content_block .product_content, .product_content_price, .product_content_qtd, .product_content_total_price{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content_block.title span{
+    font-weight: 500;
+    text-align: center;
+}
+
+
+.content_block .product_content{
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.content_block .product_content img{
+    width: 20%;
+    height: 70%;
+    object-fit: cover;
+    margin-right: 1rem;
+}
+
+.content_block .product_content span{
+    font-weight: 500;
+    font-size: .8rem;
+}
+
+.content_block .product_content_qtd input{
+    background-color: var(--secondary-1);
+    width: 70px;
+    height: 50px;
+    padding: 1rem;
+    outline: none;
+    border: 1px solid var(--text-2);
+    border-radius: 1rem;
+}
+
+.content_button_card{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content_button_card button{
+    text-decoration: none;
+    color: var(--button-card);
+    border: 1px solid var(--button-card);
+    padding: 1rem 3rem;
+    margin: 1rem 0rem 2rem 0rem;
+    transition: all 0.02s ease-in-out;
+    background-color: var(--background);
+    border-radius: .2rem;
+}
+
+.content_button_card button:hover{
+    background-color: var(--button-card);
+    color: var(--background);
+}
+
+.content_button_card button:active{
+    color: var(--button-2);
+}
+
+.footer_card{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1rem 0rem 1rem 0rem;
+}
+
+.footer_card .coupon input{
+    border: 1px solid var(--button-card);
+    padding: .8rem 3rem;
+    outline: none;
+    border-radius: .2rem;
+}
+
+.footer_card .coupon button{
+    background-color: var(--button-2);
+    border-radius: .2rem;
+    padding: .9rem;
+    color: var(--background);
+    transition: all 0.1s ease-in-out;
+}
+
+.footer_card .coupon button:hover{
+    background-color: var(--button-card);
+}
+
+.footer_card .coupon button:active{
+    color: var(--button-2);
+    transition: all 0.1ms ease-in-out;
+}
+
+.footer_card .card_resumo{
+    border: 1px solid var(--button-card);
+    border-radius: .5rem;
+    p{
+        font-weight: 700;
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+
+    div.item_resumo_card{
+        border-bottom: 1px solid var(--button-card);
+        display: flex;
+        justify-content: space-between;
+        font-size: .8rem;
+        padding: .4rem;
+        margin: .8rem;
+    }
+
+    .button{
+        text-align: center;
+
+        button{
+            background-color: var(--button-2);
+            color: var(--background);
+            padding: 1rem 3rem;
+            margin: 1rem;
+        }
+
+        button:hover{
+            background-color: var(--button-card);
+        }
+
+        button:active{
+            color: var(--button-2);
+            transition: all 0.1ms ease-in-out;
+        }
+    }
 }
