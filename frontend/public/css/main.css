@@ -400,22 +400,40 @@ header i:active{
     max-height: 487.2px;
     overflow: hidden;
     transition: max-height 0.5s ease;
-    gap: 2.8rem;
 }
 
 .content-card-products.expanded{
     max-height: fit-content;
     overflow: hidden;
     transition: max-height 0.5s ease;
-    gap: 2.8rem;
 }
 
 .content-card-products{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-template-rows: auto;
-    gap: 2rem;
+    gap: 10px;
     margin-top: 2rem;
+}
+
+@media (max-width: 1440px){
+    .content-card-products{
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        grid-template-rows: auto;
+        gap: 10px;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 1366px){
+    .content-card-products{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        gap: 10px;
+        margin-top: 2rem;
+    }
 }
 
 .content-card-categories {
@@ -424,7 +442,6 @@ header i:active{
 }
 
 .product-card {
-    width: 236px;
     height: 487.2px;
     margin-bottom: 2rem;
     background-color: var(--secondary-1);
@@ -608,6 +625,7 @@ header i:active{
 }
 
 .product-card-img img{
+    margin: 0px auto;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -652,13 +670,6 @@ header i:active{
 
 .categoria-sales-content h3{
     font-size: 2rem;
-}
-
-.content-card-products{
-    display: grid;
-    grid-template-columns: repeat(5, 236px);
-    gap: 10px;
-    max-width: 100vw;
 }
 
 .content-card-categories .categorias{
@@ -1130,6 +1141,12 @@ a.button_featuared{
     border: 1px solid white;
 }
 
+.product-card .product-card-img, .product-img {
+    width: fit-content;
+    height: fit-content;
+    margin: 0px auto;
+}
+
 .product-container {
     display: flex;
     justify-self: center;
@@ -1155,11 +1172,11 @@ a.button_featuared{
     
     .product-img {
         background-color: var(--secondary-1);
-        width: 500px;
-        height: 800px;
-        height: 600px;
-        margin-right: 70px;
+        margin: 0px auto;
+        width: fit-content;
+        height: fit-content;
         border-radius: 4px;
+        
     }
     .produt-details{
         display: flex;
@@ -1601,5 +1618,3 @@ main .url_site span{
     }
 
 }
-
-
