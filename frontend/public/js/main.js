@@ -144,6 +144,9 @@ const element = `
                 <span>★★★★★</span> (+100)
             </p>
         </div>
+        <div class="button-view">
+            <button class="button-view-product">View Product</button>
+        </div>
     </div>
   `;
 

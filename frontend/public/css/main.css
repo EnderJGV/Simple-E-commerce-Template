@@ -88,7 +88,7 @@ header .header_content.sticky{
     z-index: 10000;
     padding: 10px 100px;
     box-shadow:  0 5px 20px rgba(0,0,0,0.05);
-    transition: 0.5s;
+    transition: all 0.1s ease-in-out;
 }
 
 header .header_content ul{
@@ -106,7 +106,7 @@ header .header_content ul li a{
 header .header_content ul li{
     list-style: none;
     margin: 0rem 1rem;
-    transition: .3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 header .header_content ul li:hover{
@@ -117,7 +117,7 @@ header .header_content ul li:hover{
 
 header .header_content ul li:active{
     color: var(--hover-button-1);
-    transition: 30ms ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 /* Logo - Name*/
@@ -198,14 +198,13 @@ header .store_itens span:active{
 }
 
 header i{
-    transition: 30ms ease;
+    transition: all 0.1s ease-in-out;
 }
 
 header i:hover{
     color: var(--text-2);
 }
 header i:active{
-    transition: all 0.1s ease-in-out;
     color: var(--hover-button-1);
     transition: 1ms ease;
 }
@@ -235,7 +234,7 @@ header i:active{
     font-size: .8rem;
     line-height: 2.4;
     padding: 1rem;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 /* Hover : itens nichos */
@@ -246,7 +245,7 @@ header i:active{
 
 .itens-menu-title:active{
     color: var(--hover-button-1);
-    transition: 30ms ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .menu-content-ul{
@@ -308,11 +307,11 @@ header i:active{
     a{
         font-weight: 400;
         border-bottom: 2px solid var(--hover-button-1);
-        transition: all 0.3s ease-in-out;
+        transition: all 0.1s ease-in-out;
     }
     i{
         color: var(--hover-button-1);
-        transition: all 0.3s ease-in-out;
+        transition: all 0.1s ease-in-out;
     }
 }
 
@@ -402,7 +401,7 @@ header i:active{
     padding: .5rem;
     color: var(--text-2);
     box-shadow:  0 5px 20px rgba(0, 0, 0, 0.171);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .setas #fa-arrow-left_setas:hover, #fa-arrow-right_setas:hover
@@ -447,7 +446,7 @@ header i:active{
     margin-bottom: 1rem;
 }
 
-.product-card div button {
+.product-card .button-card {
     background-color: var(--button-card);
     color: var(--text-1);
     width: 100%;
@@ -455,21 +454,44 @@ header i:active{
     opacity: 0; /* Inicialmente invisível */
     visibility: hidden; /* Evita o botão ocupar espaço quando invisível */
     transition: opacity 0.3s ease, visibility 0.3s ease; /* Transição suave */
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    
 }
 
-.product-card div button:hover {
+.product-card .button-card:hover {
    background-color: var(--hover-button-1);
 }
-.product-card div button:active {
-    transition: all 0.1s ease-out;
+.product-card .button-card:active {
+    transition: all 0.1s ease-in-out;
    background-color: var(--primary-black);
    color: var(--hover-button-1);
 }
 
-.product-card:hover div button {
+.product-card:hover .button-card {
     opacity: 1; /* Torna o botão visível */
     visibility: visible; /* Permite que o botão seja visível */
+}
+
+.button-view .button-view-product{
+    width: 100%;
+    border: 2px solid var(--button-2);
+    color: var(--button-2);
+    background-color: var(--background);
+    padding: .5rem 0rem;
+    font-weight: 700;
+    margin-top: 1rem;
+    transition: all 0.1s ease-in-out;
+}
+
+.button-view .button-view-product:hover{
+    border: 2px solid var(--button-card);
+    color: var(--background);
+    background-color: var(--button-card);
+    font-weight: 500;
+}
+
+.button-view .button-view-product:active{
+    color: var(--button-2);
 }
 
 .product-card-text p{
@@ -509,7 +531,7 @@ header i:active{
     background-color: var(--background);
     padding: .4rem;
     border-radius: .1rem;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 .descont-product #fa-heart:hover, #fa-eye:hover{
     color: var(--primary-white);
@@ -545,7 +567,7 @@ header i:active{
     color: var(--text-1);
     font-weight: 300;
     margin: 0 auto;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .no-results-text {
@@ -569,11 +591,17 @@ header i:active{
     transition: all 0.1s ease-in-out;
 }
 
-.product-card-img > img {
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 100%;
-    max-height: 100%;
+.product-card-img {
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    overflow: hidden;
+}
+
+.product-card-img img{
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -647,7 +675,7 @@ header i:active{
     border: 1px solid var(--button-card);
     text-decoration: none;
     color: var(--button-card);
-    transition: all 0.1S ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 
 .item-categorias a:hover{
