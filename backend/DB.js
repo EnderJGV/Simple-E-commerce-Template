@@ -47,7 +47,8 @@ class DB {
                 p.cd_produto AS cdProduto,
                 p.nome AS nome,
                 c.nome AS categoria,
-                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens
+                GROUP_CONCAT(i.caminho SEPARATOR ';') AS imagens,
+                p.preco AS preco
             FROM 
                 produto p
             LEFT JOIN 
