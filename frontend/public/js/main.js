@@ -119,12 +119,14 @@ function productCardComponent({
     name, description, image, price, classification, originalPrice, discount
 }) {
 
+    console.log(image)
+
 const wrapper = document.createElement('div');
 wrapper.classList.add('product-card');
 const element = `
     <div>
         <div class="descont-product">
-            <span>-{discount}%</span>
+            <span>-${40}%</span>
             <i class="fa-solid fa-heart" id="fa-heart"></i>
             <i class="fa-solid fa-eye" id="fa-eye"></i>
         </div>
@@ -137,7 +139,7 @@ const element = `
         <p>${name}</p>
         <div class="price">
             <span class="principal">R$ ${price}</span>
-            <span class="secundario">R$ {originalPrice}</span>
+            <span class="secundario">R$ ${price + 100}</span>
         </div>
         <div class="stars">
             <p>
