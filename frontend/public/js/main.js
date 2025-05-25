@@ -118,7 +118,7 @@ async function renderProducts() {
 function productCardComponent({ 
     name, description, image, price, classification, originalPrice, discount
 }) {
-
+console.log(image);
 const wrapper = document.createElement('div');
 wrapper.classList.add('product-card');
 const element = `
@@ -129,7 +129,7 @@ const element = `
             <i class="fa-solid fa-eye" id="fa-eye"></i>
         </div>
         <div class="product-card-img">
-            <img src=${image ? image : './img/no-image.png'} alt="produto">
+            <img src=${image ? image : './img/no-image.png'} alt="produto"  onerror="this.onerror=null; this.src='./img/no-image.png';">
         </div>
         <button class="button-card">Add To Cart</button>
     </div>
