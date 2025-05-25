@@ -15,7 +15,7 @@
 <body style="height: 100vh;">
     <header>
         <div class="text_desconto">
-            <p>Desconto de % para compras <span>acima de R$ 100</span></p>
+            <p>Liquidação de verão para todos os trajes de banho e <span>entrega expressa grátis - 50% de desconto!</span></p>
         </div>
         <div class="header_content">
             <span><a href="/index.html">Exclusive</a></span>
@@ -41,75 +41,108 @@
             </div>
         </div>
     </header>
+    <main class="container_account">
 
-    <div class="container profile">
-
-        <div class="containerMenu">
+        <div class="info_account_text">
+            <p>Home / <span>Conta</span></p>
+            <p>Bem vindo! <span id="text_second">Nome</span></p>
+        </div>
+        <div class="container profile">
+            <div class="containerForm">
+                <form id="form">
+    
+                    <span style="grid-column:1 /span 2; font-weight: 600;">Edite seu perfil</span>
+    
+    
+                    <div style="grid-column: 1 /span 2" class="container-input">
+                        <label for="firstName">Primeiro nome</label>
+                        <input name="firstName" type="text" id="firstName">
+                    </div>
+    
+    
+                    <div style="grid-column: 3 /span 2" class="container-input">
+                        <label for="lastName">Sobrenome</label>
+                        <input name="lastName" type="text">
+                    </div>
+    
+                    <div style="grid-column: 1 /span 2" class="container-input">
+                        <label for="email">Email</label>
+                        <input name="email" type="text" placeholder="exemplo@gmail.com" id="email">
+                    </div>
+    
+                    <div style="grid-column: 3 /span 2" class="container-input">
+                        <label for="adress">Endereço</label>
+                        <input name="adress" type="text">
+                    </div>
+    
+                    <div style="grid-column: 1 /span 4" class="container-input">
+                        <label>Mudança de senha</label>
+                        <input name="currentPassword" type="text" placeholder="Senha atual">                  
+                    </div> 
+    
+                    <div style="grid-column: 1 /span 4" class="container-input">
+                        <label>Digite a nova senha</label>
+                        <input name="newPassword" type="text" placeholder="Nova senha">
+                    </div> 
+    
+                    <div style="grid-column: 1 /span 4" class="container-input">
+                        <label>Confirme a nova senha</label>
+                        <input name="confirmNewPassword" type="text" placeholder="Confirme a nova senha ">
+                    </div>
+                    
+                </form>
+    
+                <div style="grid-column: 1 /span 4 " class="container-footer">
+                    <button class="button-flat">
+                        Cancelar
+                    </button>
+                    <button class="button-red" id="btnSave">
+                        Salvar Alterações
+                    </button>
+    
+                </div>
+    
+    
+            </div>
+        </div>
+    </main>
+        <div class="footer">
+        <div class="footer-content">
             <div>
-                <span class="textMenuTitle">
-                    Manage My Account
-                </span>     
+                <span class="text-emphasis" style="font-size: 24px;">Exclusive</span>
+                <span>Subscrição</span>
+                <span>Ganhe 10% de desconto na sua compra</span>
+                <div class="email-input">
+                    <input type="text" placeholder="Digie seu e-mail">
+                    <i class="fa-regular fa-paper-plane"></i>
+                </div>
+            </div>
+            <div>
+                <span class="text-emphasis">Suporte</span>
+                <span>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</span>
+                <span>exclusive@gmail.com</span>
+                <span>+88015-88888-9999</span>
+            </div>
+            <div>
+                <span class="text-emphasis">Conta</span>
+                <span>Minha conta</span>
+                <span>Carrinho</span>
+                <span>Lista de Produtos</span>
+                <span>Loja</span>
+            </div>
+            <div>
+                <span class="text-emphasis">Outro links</span>
+                <span>Politicas de Privacidade</span>
+                <span>Termos e Uso</span>
+                <span>FAQ</span>
+                <span>Contato</span>
+            </div>
+            <div>
+                <span class="text-emphasis">Baixar App</span>
+                <div>app informacoes</div>
+                <div>Botões de redes sociais</div>
             </div>
         </div>
-
-        <div class="containerForm">
-            <form id="form">
-
-                <span style="grid-column:1 /span 2">Edite seu perfil</span>
-
-
-                <div style="grid-column: 1 /span 2" class="container-input">
-                    <label for="firstName">Primeiro nome</label>
-                    <input name="firstName" type="text" id="firstName">
-                </div>
-
-
-                <div style="grid-column: 3 /span 2" class="container-input">
-                    <label for="lastName">Sobrenome</label>
-                    <input name="lastName" type="text">
-                </div>
-
-                <div style="grid-column: 1 /span 2" class="container-input">
-                    <label for="email">Email</label>
-                    <input name="email" type="text" placeholder="exemplo@gmail.com" id="email">
-                </div>
-
-                <div style="grid-column: 3 /span 2" class="container-input">
-                    <label for="adress">Endereço</label>
-                    <input name="adress" type="text">
-                </div>
-
-                <div style="grid-column: 1 /span 4" class="container-input">
-                    <label>Mudança de senha</label>
-                    <input name="currentPassword" type="text" placeholder="Senha atual">                  
-                </div> 
-
-                <div style="grid-column: 1 /span 4" class="container-input">
-                    <input name="newPassword" type="text" placeholder="Nova senha">
-                </div> 
-
-                <div style="grid-column: 1 /span 4" class="container-input">
-                    <input name="confirmNewPassword" type="text" placeholder="Confirme a nova senha ">
-                </div>
-                
-            </form>
-
-            <div style="grid-column: 1 /span 4 " class="container-footer">
-                <button class="button-flat">
-                    Cancelar
-                </button>
-                <button class="button-red" id="btnSave">
-                    Salvar Alterações
-                </button>
-
-            </div>
-
-
-        </div>
-
-
-
-
     </div>
 </body>
 <script>

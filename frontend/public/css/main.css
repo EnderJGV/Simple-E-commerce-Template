@@ -990,17 +990,28 @@ a.button_featuared{
     padding:40px 80px ;
     min-height: 630px ;
     height: fit-content;
-    width: 870px ;
+    width: 70%;
+    margin: 0 auto;
     box-shadow: 0px 0px 7px 0px #00000078;
     form {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
         display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         gap:50px;
         input{
             padding: 8px 13px;
             border:none;
             background-color: #F5F5F5;
             border-radius: 4px;
+            transition: all 0.1ms ease-in;
+            outline: none;
+        }
+
+        input:hover{
+            border:1px solid var(--button-2);
+        }
+
+        input:active{
+            border:1px solid var(--text-2);
         }
     }
 }
@@ -1039,6 +1050,10 @@ a.button_featuared{
 
 .containerMenu {
     width: 300px;
+}
+
+.containerMenu div p.url_site{
+    margin-bottom: 2rem;
 }
 
 .containerMenu >div {
@@ -1560,3 +1575,23 @@ main .url_site span{
         }
     }
 }
+
+/* Container account */
+.container_account{
+    margin-bottom: 5rem;
+}
+.container_account div.info_account_text{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+
+    p span{
+       font-weight: 500;
+    }
+
+}
+
+

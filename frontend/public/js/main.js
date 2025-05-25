@@ -11,9 +11,9 @@ window.addEventListener('DOMContentLoaded',() => {
         const loginLink = document.querySelector('a[href="/login"]');
         const signUpLink = document.querySelector('a[href="/singUp.html"]');
         loginLink.querySelector('span').textContent = user.name;
-        loginLink.setAttribute('href', '/user/profile');
+        loginLink.setAttribute('href', '/account');
         signUpLink.textContent = 'Meu Perfil';
-        signUpLink.setAttribute('href', '/user/profile');
+        signUpLink.setAttribute('href', '/account');
     }
     renderProducts();
 })

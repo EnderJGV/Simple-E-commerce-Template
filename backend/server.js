@@ -71,9 +71,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/user/account', (req, res) => {
-    res.sendFile(path.join(__dirname, 'account.html'));
-});
 
 app.post('/login', async (req, res) => {
     try {
@@ -159,9 +156,6 @@ app.post('/user/register', async (req, res) => {
     }
 })
 
-app.get('/account', (req,res) => {
-    res.sendFile(path.join(__dirname, 'account.html'));
-})
 
 app.get('/produto', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/productDetails.html'));
@@ -175,7 +169,7 @@ app.get('/login', async (req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/login.html'));
 })
 
-app.get('/user/profile', async(req, res) => {
+app.get('/account', async(req, res) => {
     res.status(200).sendFile(path.join(__dirname, '../frontend/public/account.html'));
 })
 
