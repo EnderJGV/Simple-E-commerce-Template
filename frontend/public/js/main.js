@@ -164,7 +164,7 @@ const element = `
         <div class="product-card-img">
             <img src=${image ? image : './img/no-image.png'} alt="produto"  onerror="this.onerror=null; this.src='./img/no-image.png';">
         </div>
-        <button class="button-card">Add To Cart</button>
+        <button class="button-card">Adicionar ao Carrinho</button>
     </div>
     <div class="product-card-text">
         <p>${textLimiter(name, 35)}</p>
@@ -179,7 +179,7 @@ const element = `
         </p>
     </div>
     <div class="button-view">
-            <button onclick ="window.location.href = '/produto?id=${id}'" class="button-view-product">View Product</button>
+            <button onclick ="window.location.href = '/produto?id=${id}'" class="button-view-product">Ver Produto</button>
     </div>
   `;
 
