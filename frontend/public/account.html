@@ -45,7 +45,7 @@
 
         <div class="info_account_text">
             <p>Home / <span>Conta</span></p>
-            <p>Bem vindo! <span id="text_second">Nome</span></p>
+            <p>Bem vindo! <span id="welcome_text_name">Nome</span></p>
         </div>
         <div class="container profile">
             <div class="containerForm">
@@ -151,6 +151,7 @@
         if(userdata){
             const {name, email} =JSON.parse(userdata)
             document.getElementById("firstName").value=name;
+            document.getElementById("welcome_text_name").innerText=name;
             document.getElementById("email").value=email;
         }
     })
